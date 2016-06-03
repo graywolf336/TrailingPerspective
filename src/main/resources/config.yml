@@ -1,0 +1,6 @@
+system:
+  debug: true
+perspective:
+  username: goose160
+  change-interval: 5minutes
+  automatically-enabled: true
