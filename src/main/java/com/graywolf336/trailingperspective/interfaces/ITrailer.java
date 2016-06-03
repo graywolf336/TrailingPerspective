@@ -28,11 +28,40 @@ public interface ITrailer {
     public UUID getUUID();
 
     /**
+     * Gets a cached copy of the trailer's username.
+     *
+     * @return the cached copy of the trailer's username.
+     */
+    public String getUsername();
+
+    /**
+     * Checks whether the {@link Player} is online or not.
+     *
+     * @return whether the {@link Player} is online or not.
+     */
+    public boolean isOnline();
+
+    /**
      * Gets the amount of time this trailer has been trailing perspectives.
      *
      * @return the amount of time in milliseconds this person has been a trailer
      */
-    public Long getTimeTrailing();
+    public Long getTotalTimeTrailing();
+
+    /**
+     * Gets the amount of time this trailer has been trailing the current perspective.
+     *
+     * @return the amount of time in milliseconds this person has been trailing this particular
+     *         perspective.
+     */
+    public Long getCurrentPerspectiveTrailingTime();
+
+    /**
+     * Sets the {@link Player} this trailer is currently trailing.
+     *
+     * @param player the player who they're trailing.
+     */
+    public void setPlayerCurrentlyTrailing(Player player);
 
     /**
      * Gets the {@link Player} this trailer is currently viewing the perspective of.

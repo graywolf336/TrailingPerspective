@@ -1,4 +1,12 @@
 name: TrailingPerspective
-main: com.graywolf336.trailingperspective.TrailingPerspectiveMainMain
+main: com.graywolf336.trailingperspective.TrailingPerspectiveMain
 version: maven-version-number
 authors: [graywolf336]
+softdepend: [WorldEdit, Vault]
+load: POSTWORLD
+commands:
+  togglebeingtrailer:
+    description: Toggles you being a trailer of others perspectives.
+permissions:
+  trailingperspective.togglebeingtrailer:
+    default: op

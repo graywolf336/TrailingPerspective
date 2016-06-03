@@ -2,10 +2,13 @@ package com.graywolf336.trailingperspective;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.graywolf336.trailingperspective.commands.ToggleBeingTrailer;
 import com.graywolf336.trailingperspective.enums.Settings;
 import com.graywolf336.trailingperspective.interfaces.ITrailerManager;
 import com.graywolf336.trailingperspective.listeners.TrailingPerspectivePlayerListener;
 import com.graywolf336.trailingperspective.managers.TrailerManager;
+import com.graywolf336.trailingperspective.workers.SpectatorSetWorker;
+import com.graywolf336.trailingperspective.workers.TrailersPerspectiveWorker;
 
 public class TrailingPerspectiveMain extends JavaPlugin {
     private boolean debug = false;
@@ -20,19 +23,22 @@ public class TrailingPerspectiveMain extends JavaPlugin {
     public void onEnable() {
         this.trailerManager = new TrailerManager();
         this.getServer().getPluginManager().registerEvents(new TrailingPerspectivePlayerListener(this), this);
+        this.setupCommands();
+        this.setupWorkers();
     }
 
     public void onDisable() {
-        if(this.trailerManager != null) {
+        if (this.trailerManager != null) {
             this.trailerManager.removeAllTrailers();
         }
-        
+
+        this.getServer().getScheduler().cancelTasks(this);
         this.trailerManager = null;
     }
-    
+
     /**
      * Gets the current instance of the {@link ITrailerManager}.
-     * 
+     *
      * @return the trailer manager instance
      */
     public ITrailerManager getTrailerManager() {
@@ -55,5 +61,16 @@ public class TrailingPerspectiveMain extends JavaPlugin {
                 }
             }
         }
+    }
+
+    private void setupCommands() {
+        ToggleBeingTrailer toggleCmd = new ToggleBeingTrailer(this);
+        this.getCommand("togglebeingtrailer").setExecutor(toggleCmd);
+        this.getCommand("togglebeingtrailer").setTabCompleter(toggleCmd);
+    }
+
+    private void setupWorkers() {
+        this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new SpectatorSetWorker(this), 20, 5);
+        this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new TrailersPerspectiveWorker(this), 20, 10);
     }
 }

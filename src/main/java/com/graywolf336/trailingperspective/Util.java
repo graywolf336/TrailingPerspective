@@ -1,26 +1,29 @@
 package com.graywolf336.trailingperspective;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 public class Util {
     private final static Pattern DURATION_PATTERN = Pattern.compile("^(\\d+)\\s*(m(?:inute)?s?|h(?:ours?)?|d(?:ays?)?|s(?:econd)?s?)?$", Pattern.CASE_INSENSITIVE);
-    private final static int MILLISECONDS_PER_TICK = 50;
 
     /**
-     * Converts a string like '20minutes' into the appropriate amount of ticks.
+     * Converts a string like '20minutes' into the appropriate amount of milliseconds.
      *
      * @param time in a string to convert.
-     * @return The time in ticks that is converted or default of 20 ticks.
+     * @param fallback the time to fallback to if we failed to parse
+     * @return The time in milliseconds that is converted.
      */
-    public static Long getTime(String time) {
+    public static Long getTime(String time, Long fallback) {
         if (time.equalsIgnoreCase("-1"))
             return -1L;
 
-        Long t = 20L;
+        Long t = 1000L;
         Matcher match = DURATION_PATTERN.matcher(time);
 
         if (match.matches()) {
@@ -38,11 +41,25 @@ public class Util {
                     t = TimeUnit.MILLISECONDS.convert(Long.parseLong(time), TimeUnit.MINUTES);
                 } catch (NumberFormatException e) {
                     Bukkit.getLogger().warning("Failed to parse the time passed in \"" + time + "\"");
+                    t = fallback;
                 }
             }
+        } else {
+            t = fallback;
         }
 
-        // 1 tick is 50 milliseconds
-        return t / MILLISECONDS_PER_TICK;
+        return t;
+    }
+
+    /**
+     * Gets a random {@link Player} whose name is not equal to the given name
+     *
+     * @param names the names to ignore.
+     * @return a random {@link Player} <strong>OR</strong> null
+     */
+    public static Player getRandomPlayerNotInList(String... names) {
+        List<String> namesToCheck = Arrays.asList(names);
+
+        return Bukkit.getOnlinePlayers().stream().filter(p -> !namesToCheck.contains(p.getName())).findAny().orElse(null);
     }
 }

@@ -2,6 +2,7 @@ package com.graywolf336.trailingperspective.managers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.bukkit.entity.Player;
@@ -22,6 +23,12 @@ public class TrailerManager implements ITrailerManager {
 
     public boolean removeTrailer(ITrailer trailer) {
         return this.trailers.remove(trailer);
+    }
+
+    public boolean removeTrailer(UUID uuid) {
+        Optional<ITrailer> trailer = this.trailers.stream().filter(t -> t.getUUID().equals(uuid)).findFirst();
+
+        return trailer.isPresent() ? this.trailers.remove(trailer.get()) : false;
     }
 
     public ITrailer getTrailer(Player player) {
@@ -46,10 +53,10 @@ public class TrailerManager implements ITrailerManager {
 
     public List<ITrailer> removeAllTrailers() {
         List<ITrailer> preTrailers = new ArrayList<ITrailer>(this.trailers);
-        
-        //TODO: Maybe look into locking this down? Idk
+
+        // TODO: Maybe look into locking this down? Idk
         this.trailers.clear();
-        
+
         return preTrailers;
     }
 }

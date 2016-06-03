@@ -29,6 +29,14 @@ public interface ITrailerManager {
     public boolean removeTrailer(ITrailer trailer);
 
     /**
+     * Removes a {@link ITrailer trailer} from being managed by their {@link UUID}.
+     *
+     * @param uuid the uuid of the trailer to remove
+     * @return whether they were successfully removed or not
+     */
+    public boolean removeTrailer(UUID uuid);
+
+    /**
      * Gets the {@link ITrailer} instance from the player instance.
      *
      * @param player the player to search by.
