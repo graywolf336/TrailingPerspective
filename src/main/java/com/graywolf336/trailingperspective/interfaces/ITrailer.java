@@ -51,8 +51,7 @@ public interface ITrailer {
     /**
      * Gets the amount of time this trailer has been trailing the current perspective.
      *
-     * @return the amount of time in milliseconds this person has been trailing this particular
-     *         perspective.
+     * @return the amount of time in milliseconds this person has been trailing this particular perspective.
      */
     public Long getCurrentPerspectiveTrailingTime();
 
@@ -69,6 +68,16 @@ public interface ITrailer {
      * @return the current trailer's perspective's {@link Player}
      */
     public Player getPlayerCurrentlyTrailing();
+
+    /**
+     * Gets the {@link UUID} of the player who this trailer is currently viewing the perspective of.
+     *
+     * @return the {@link UUID} of the current trailer's perspective
+     */
+    public UUID getUUIDOfPlayerCurrentlyTrailing();
+    
+    /** Sets that this trailer is no longer trailing anyone. */
+    public void setNoLongerTrailingAnyone();
 
     /**
      * Gets a list of the usernames who this trailer has trailed.

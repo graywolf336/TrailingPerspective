@@ -56,6 +56,15 @@ public class Trailer implements ITrailer {
     public Player getPlayerCurrentlyTrailing() {
         return this.trailingPlayerUuid == null ? null : Bukkit.getPlayer(this.trailingPlayerUuid);
     }
+    
+    public UUID getUUIDOfPlayerCurrentlyTrailing() {
+        return this.trailingPlayerUuid;
+    }
+    
+    public void setNoLongerTrailingAnyone() {
+        this.trailingPlayerUuid = null;
+        this.currentTrailingStartTime = 0L;
+    }
 
     public List<String> getPlayersLastTrailed() {
         return this.previousTrailed;

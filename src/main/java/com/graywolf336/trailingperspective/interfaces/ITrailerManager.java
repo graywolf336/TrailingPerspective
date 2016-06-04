@@ -73,6 +73,42 @@ public interface ITrailerManager {
     public boolean isTrailer(UUID uuid);
 
     /**
+     * Checks whether the given player instance is being trailed by a {@link ITrailer trailer} or not.
+     *
+     * @param player the player to check
+     * @return whether the player is being trailed by a {@link ITrailer trailer} or not.
+     * @deprecated Use {@link #isBeingTrailed(UUID)}
+     */
+    @Deprecated
+    public boolean isBeingTrailed(Player player);
+
+    /**
+     * Checks whether the given {@link UUID} is being trailed by a {@link ITrailer trailer} or not.
+     *
+     * @param uuid the uuid to check
+     * @return whether the uuid is being trailed by a {@link ITrailer trailer} or not.
+     */
+    public boolean isBeingTrailed(UUID uuid);
+
+    /**
+     * Gets the {@link ITrailer trailers} who are currently trailing the given {@link Player}.
+     *
+     * @param player the player whose trailers we should get
+     * @return the {@link ITrailer trailers} trailing the given player
+     * @deprecated Use {@link #getTrailersTrailingPlayer(UUID)}
+     */
+    @Deprecated
+    public List<ITrailer> getTrailersTrailingPlayer(Player player);
+
+    /**
+     * Gets the {@link ITrailer trailers} who are currently trailing the given {@link UUID}.
+     *
+     * @param uuid the uuid of the player whose trailers we should get
+     * @return the {@link ITrailer trailers} trailing the given player
+     */
+    public List<ITrailer> getTrailersTrailingPlayer(UUID uuid);
+
+    /**
      * Gets the list of the current {@link ITrailer trailers}
      *
      * @return list of the current trailers

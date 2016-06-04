@@ -61,6 +61,7 @@ public class TrailersPerspectiveWorker implements ITrailerWorker {
 
                     this.pl.getLogger().info(trailer.getUsername() + " is now trailing the perspective of " + p.getName());
                     trailer.getPlayer().sendMessage(ChatColor.GREEN + "NOW TRAILING: " + p.getDisplayName());
+                    trailer.getPlayer().sendTitle(ChatColor.GREEN + "Spectating: " + p.getDisplayName(), "");
                 }
             }
         }
