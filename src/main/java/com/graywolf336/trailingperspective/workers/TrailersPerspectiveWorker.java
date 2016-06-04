@@ -22,6 +22,8 @@ public class TrailersPerspectiveWorker implements ITrailerWorker {
 
     @SuppressWarnings("deprecation")
     public void run() {
+        if(this.pl.getServer().getOnlinePlayers().size() <= this.pl.getTrailerManager().getTrailers().size()) return;
+        
         for (ITrailer trailer : this.pl.getTrailerManager().getTrailers()) {
             if (trailer.isOnline() && trailer.getPlayer().getGameMode() == GameMode.SPECTATOR && (trailer.getCurrentPerspectiveTrailingTime() > this.changeInterval || trailer.getCurrentPerspectiveTrailingTime() == 0)) {
                 Player p = null;
