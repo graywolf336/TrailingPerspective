@@ -68,14 +68,14 @@ public class TrailerManager implements ITrailerManager {
     public List<ITrailer> getTrailersTrailingPlayer(UUID uuid) {
         return this.trailers.stream().filter(t -> t.getUUIDOfPlayerCurrentlyTrailing().equals(uuid)).collect(Collectors.toList());
     }
-    
+
     public List<ITrailer> removeAllTrailers() {
         List<ITrailer> preTrailers = new ArrayList<ITrailer>(this.trailers);
-        
-        for(ITrailer trailer : this.trailers) {
+
+        for (ITrailer trailer : this.trailers) {
             trailer.setNoLongerTrailingAnyone();
-            
-            if(trailer.isOnline() && trailer.getPlayer().getGameMode() == GameMode.SPECTATOR) {
+
+            if (trailer.isOnline() && trailer.getPlayer().getGameMode() == GameMode.SPECTATOR) {
                 trailer.getPlayer().setSpectatorTarget(null);
             }
         }

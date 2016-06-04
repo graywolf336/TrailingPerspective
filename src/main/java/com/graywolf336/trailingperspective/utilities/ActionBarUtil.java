@@ -38,7 +38,7 @@ public class ActionBarUtil {
 
     /**
      * This method checks if the ActionBarUtil has been initialized properly
-     * 
+     *
      * @return returns a boolean indicating initialization.
      */
     public static boolean isinitialized() {
@@ -47,7 +47,7 @@ public class ActionBarUtil {
 
     /**
      * This method sends an ActionBar message to a player, ChatColor works as well.
-     * 
+     *
      * @param message The message to be sent to the player(s).
      * @param p The player(s) to receive the ActionBar message.
      * @return Returns a boolean indicating if the method execution was successful. <br>

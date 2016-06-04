@@ -12,24 +12,25 @@ import org.bukkit.command.CommandSender;
 public enum Permissions {
     /** The permission for the toggle being a trailer command, defaults to op. */
     TOGGLE_BEING_TRAILER("trailingperspective.togglebeingtrailer");
-    
+
     private String node;
+
     private Permissions(String node) {
         this.node = node;
     }
-    
+
     /**
      * Gets the permission node for this permission.
-     * 
+     *
      * @return the node
      */
     public String getNode() {
         return this.node;
     }
-    
+
     /**
      * Checks if the given sender, can be a player, has the permission.
-     * 
+     *
      * @param sender the person to check
      * @return whether the player has permission or not
      */

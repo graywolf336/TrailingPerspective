@@ -97,9 +97,9 @@ public class Util {
      * @param names the names to ignore.
      * @return a random {@link Player} <strong>OR</strong> null
      */
-    public static Player getRandomPlayerNotInList(String... names) {
+    public static Player getRandomAlivePlayerNotInList(String... names) {
         List<String> namesToCheck = Arrays.asList(names);
 
-        return Bukkit.getOnlinePlayers().stream().filter(p -> !namesToCheck.contains(p.getName())).findAny().orElse(null);
+        return Bukkit.getOnlinePlayers().stream().filter(p -> !namesToCheck.contains(p.getName()) && !p.isDead()).findAny().orElse(null);
     }
 }
