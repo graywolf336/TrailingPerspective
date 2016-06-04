@@ -52,6 +52,46 @@ public class Util {
     }
 
     /**
+     * Convert a millisecond duration to a string format
+     *
+     * @param millis A duration to convert to a string form
+     * @return A string of the form "X days Y hours Z minutes A seconds".
+     */
+    public static String getDurationBreakdown(long millis) {
+        if (millis < 0)
+            return "ASAP";
+
+        long days = TimeUnit.MILLISECONDS.toDays(millis);
+        millis -= TimeUnit.DAYS.toMillis(days);
+        long hours = TimeUnit.MILLISECONDS.toHours(millis);
+        millis -= TimeUnit.HOURS.toMillis(hours);
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
+        millis -= TimeUnit.MINUTES.toMillis(minutes);
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
+
+        StringBuilder sb = new StringBuilder();
+        if (days > 0) {
+            sb.append(days);
+            sb.append(" day" + (days == 1 ? "" : "s") + " ");
+        }
+
+        if (days > 0 || hours > 0) {
+            sb.append(hours);
+            sb.append(" hour" + (hours == 1 ? "" : "s") + " ");
+        }
+
+        if (days > 0 || hours > 0 || minutes > 0) {
+            sb.append(minutes);
+            sb.append(" minute" + (minutes == 1 ? "" : "s") + " ");
+        }
+
+        sb.append(seconds);
+        sb.append(" second" + (seconds == 1 ? "" : "s"));
+
+        return sb.toString();
+    }
+
+    /**
      * Gets a random {@link Player} whose name is not equal to the given name
      *
      * @param names the names to ignore.

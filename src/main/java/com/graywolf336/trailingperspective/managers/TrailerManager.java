@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 import com.graywolf336.trailingperspective.interfaces.ITrailer;
@@ -70,6 +71,14 @@ public class TrailerManager implements ITrailerManager {
     
     public List<ITrailer> removeAllTrailers() {
         List<ITrailer> preTrailers = new ArrayList<ITrailer>(this.trailers);
+        
+        for(ITrailer trailer : this.trailers) {
+            trailer.setNoLongerTrailingAnyone();
+            
+            if(trailer.isOnline() && trailer.getPlayer().getGameMode() == GameMode.SPECTATOR) {
+                trailer.getPlayer().setSpectatorTarget(null);
+            }
+        }
 
         // TODO: Maybe look into locking this down? Idk
         this.trailers.clear();

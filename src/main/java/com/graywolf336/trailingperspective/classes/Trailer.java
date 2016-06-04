@@ -43,6 +43,10 @@ public class Trailer implements ITrailer {
         return this.startTime == 0 ? this.startTime : System.currentTimeMillis() - this.startTime;
     }
 
+    public boolean isCurrentlyTrailingSomeone() {
+        return this.trailingPlayerUuid != null;
+    }
+
     public Long getCurrentPerspectiveTrailingTime() {
         return this.currentTrailingStartTime == 0 ? this.currentTrailingStartTime : System.currentTimeMillis() - this.currentTrailingStartTime;
     }
@@ -56,11 +60,11 @@ public class Trailer implements ITrailer {
     public Player getPlayerCurrentlyTrailing() {
         return this.trailingPlayerUuid == null ? null : Bukkit.getPlayer(this.trailingPlayerUuid);
     }
-    
+
     public UUID getUUIDOfPlayerCurrentlyTrailing() {
         return this.trailingPlayerUuid;
     }
-    
+
     public void setNoLongerTrailingAnyone() {
         this.trailingPlayerUuid = null;
         this.currentTrailingStartTime = 0L;

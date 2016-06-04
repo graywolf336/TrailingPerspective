@@ -49,6 +49,13 @@ public interface ITrailer {
     public Long getTotalTimeTrailing();
 
     /**
+     * Gets whether this trailer is currently trailing someone or not.
+     *
+     * @return whether this trailing is busy trailing someone or not
+     */
+    public boolean isCurrentlyTrailingSomeone();
+
+    /**
      * Gets the amount of time this trailer has been trailing the current perspective.
      *
      * @return the amount of time in milliseconds this person has been trailing this particular perspective.
@@ -75,7 +82,7 @@ public interface ITrailer {
      * @return the {@link UUID} of the current trailer's perspective
      */
     public UUID getUUIDOfPlayerCurrentlyTrailing();
-    
+
     /** Sets that this trailer is no longer trailing anyone. */
     public void setNoLongerTrailingAnyone();
 

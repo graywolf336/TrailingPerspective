@@ -9,6 +9,7 @@ import com.graywolf336.trailingperspective.Util;
 import com.graywolf336.trailingperspective.enums.Settings;
 import com.graywolf336.trailingperspective.interfaces.ITrailer;
 import com.graywolf336.trailingperspective.interfaces.ITrailerWorker;
+import com.graywolf336.trailingperspective.utilities.ActionBarUtil;
 
 public class TrailersPerspectiveWorker implements ITrailerWorker {
     private TrailingPerspectiveMain pl;
@@ -61,7 +62,8 @@ public class TrailersPerspectiveWorker implements ITrailerWorker {
 
                     this.pl.getLogger().info(trailer.getUsername() + " is now trailing the perspective of " + p.getName());
                     trailer.getPlayer().sendMessage(ChatColor.GREEN + "NOW TRAILING: " + p.getDisplayName());
-                    trailer.getPlayer().sendTitle(ChatColor.GREEN + "Spectating: " + p.getDisplayName(), "");
+                    trailer.getPlayer().sendTitle("", ChatColor.GREEN + "Now Trailing: " + p.getDisplayName());
+                    ActionBarUtil.sendActionBar(ChatColor.GREEN + "Testing !! :D", trailer.getPlayer());
                 }
             }
         }

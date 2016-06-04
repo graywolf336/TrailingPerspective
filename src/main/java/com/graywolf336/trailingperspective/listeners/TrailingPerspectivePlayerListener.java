@@ -1,9 +1,13 @@
 package com.graywolf336.trailingperspective.listeners;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -11,12 +15,27 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import com.graywolf336.trailingperspective.TrailingPerspectiveMain;
 import com.graywolf336.trailingperspective.classes.Trailer;
 import com.graywolf336.trailingperspective.enums.Settings;
+import com.graywolf336.trailingperspective.interfaces.ITrailer;
 
 public class TrailingPerspectivePlayerListener implements Listener {
     private TrailingPerspectiveMain pl;
 
     public TrailingPerspectivePlayerListener(TrailingPerspectiveMain plugin) {
         this.pl = plugin;
+    }
+    
+    @EventHandler
+    public void playersAreChattyPeople(AsyncPlayerChatEvent event) {
+        if(Settings.CLEAR_TRAILERS_CHAT.asBoolean()) {
+            Set<Player> rec = new HashSet<Player>(event.getRecipients());
+            
+            for(ITrailer trailer : this.pl.getTrailerManager().getTrailers()) {
+                rec.remove(trailer.getPlayer());
+            }
+            
+            event.getRecipients().clear();
+            event.getRecipients().addAll(rec);
+        }
     }
 
     @EventHandler

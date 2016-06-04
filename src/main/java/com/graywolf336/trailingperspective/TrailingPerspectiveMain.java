@@ -8,6 +8,7 @@ import com.graywolf336.trailingperspective.interfaces.ITrailerManager;
 import com.graywolf336.trailingperspective.listeners.TrailingPerspectivePlayerListener;
 import com.graywolf336.trailingperspective.managers.TrailerManager;
 import com.graywolf336.trailingperspective.workers.SpectatorSetWorker;
+import com.graywolf336.trailingperspective.workers.TrailerInformationWorker;
 import com.graywolf336.trailingperspective.workers.TrailersPerspectiveWorker;
 
 public class TrailingPerspectiveMain extends JavaPlugin {
@@ -72,5 +73,6 @@ public class TrailingPerspectiveMain extends JavaPlugin {
     private void setupWorkers() {
         this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new SpectatorSetWorker(this), 20, 5);
         this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new TrailersPerspectiveWorker(this), 20, 10);
+        this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new TrailerInformationWorker(this), 20, 10);
     }
 }

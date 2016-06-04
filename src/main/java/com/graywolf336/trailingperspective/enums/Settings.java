@@ -19,7 +19,9 @@ public enum Settings {
     /** The amount of time between changing between people. */
     CHANGE_INTERVAL("perspective.change-interval"),
     /** Determines whether or not the user is taken over upon logging in. */
-    AUTOMATICALLY_ENABLED("perspective.automatically-enabled");
+    AUTOMATICALLY_ENABLED("perspective.automatically-enabled"),
+    /** Determines whether or not to clear the trailer's chat they get. */
+    CLEAR_TRAILERS_CHAT("perspective.clear-chat");
 
     private static Plugin pl;
     private String path;
