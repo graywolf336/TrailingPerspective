@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 
 import com.graywolf336.trailingperspective.TrailingPerspectiveMain;
 import com.graywolf336.trailingperspective.classes.Trailer;
+import com.graywolf336.trailingperspective.enums.Permissions;
 import com.graywolf336.trailingperspective.interfaces.ICommand;
 
 public class ToggleBeingTrailer implements ICommand {
@@ -21,7 +22,7 @@ public class ToggleBeingTrailer implements ICommand {
     }
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender.hasPermission("trailingperspective.togglebeingtrailer") && sender instanceof Player) {
+        if (Permissions.TOGGLE_BEING_TRAILER.has(sender) && sender instanceof Player) {
             Player player = (Player) sender;
 
             if (pl.getTrailerManager().isTrailer(player.getUniqueId())) {
