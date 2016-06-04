@@ -34,9 +34,16 @@ public class TrailersPerspectiveWorker implements ITrailerWorker {
                 } else {
                     String lastUser = trailer.getPlayersLastTrailed().get(trailer.getPlayersLastTrailed().size() - 1);
                     p = Util.getRandomPlayerNotInList(trailer.getPlayer().getName(), lastUser);
-
+                    
+                    //if we couldn't get anyone, then just get someone who isn't this trailer
                     if (p == null) {
                         p = Util.getRandomPlayerNotInList(trailer.getPlayer().getName());
+                    }
+                    
+                    //If the player isn't null and it's the same player as who was before,
+                    //then don't try anything fancy and just move onto the next trailer
+                    if(p != null && p.getName().equalsIgnoreCase(lastUser)) {
+                        continue;
                     }
                 }
 
@@ -44,7 +51,13 @@ public class TrailersPerspectiveWorker implements ITrailerWorker {
                     this.pl.getLogger().warning("Failed to get a player to trail for " + trailer.getPlayer().getName());
                 } else {
                     trailer.setPlayerCurrentlyTrailing(p);
-                    trailer.getPlayer().setSpectatorTarget(p);
+                    trailer.getPlayer().teleport(p);
+                    trailer.getPlayer().setSpectatorTarget(null);
+                    
+                    final Player target = p;
+                    this.pl.getServer().getScheduler().runTaskLater(this.pl, () -> {
+                        trailer.getPlayer().setSpectatorTarget(target);
+                    }, 2L);
 
                     this.pl.getLogger().info(trailer.getUsername() + " is now trailing the perspective of " + p.getName());
                     trailer.getPlayer().sendMessage(ChatColor.GREEN + "NOW TRAILING: " + p.getDisplayName());

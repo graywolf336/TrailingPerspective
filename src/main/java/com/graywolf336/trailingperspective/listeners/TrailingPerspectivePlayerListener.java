@@ -1,5 +1,6 @@
 package com.graywolf336.trailingperspective.listeners;
 
+import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -29,6 +30,10 @@ public class TrailingPerspectivePlayerListener implements Listener {
         if (this.pl.getTrailerManager().isTrailer(event.getPlayer().getUniqueId())) {
             this.pl.debug(false, "A trailing player has quit left us.");
             this.pl.getTrailerManager().removeTrailer(event.getPlayer().getUniqueId());
+            
+            if(event.getPlayer().getGameMode() == GameMode.SPECTATOR) {
+                event.getPlayer().setSpectatorTarget(null);
+            }
         }
     }
 }
