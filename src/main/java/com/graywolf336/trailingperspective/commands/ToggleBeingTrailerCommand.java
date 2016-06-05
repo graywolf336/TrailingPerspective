@@ -14,10 +14,10 @@ import com.graywolf336.trailingperspective.classes.Trailer;
 import com.graywolf336.trailingperspective.enums.Permissions;
 import com.graywolf336.trailingperspective.interfaces.ICommand;
 
-public class ToggleBeingTrailer implements ICommand {
+public class ToggleBeingTrailerCommand implements ICommand {
     private TrailingPerspectiveMain pl;
 
-    public ToggleBeingTrailer(TrailingPerspectiveMain plugin) {
+    public ToggleBeingTrailerCommand(TrailingPerspectiveMain plugin) {
         this.pl = plugin;
     }
 

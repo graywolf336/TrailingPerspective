@@ -48,7 +48,9 @@ public class TrailersPerspectiveWorker implements ITrailerWorker {
                     }
                 }
 
-                if (p != null) {
+                if (p == null) {
+                    trailer.setNoLongerTrailingAnyone();
+                } else {
                     trailer.setPlayerCurrentlyTrailing(p);
                     trailer.getPlayer().teleport(p);
                     trailer.getPlayer().setSpectatorTarget(null);

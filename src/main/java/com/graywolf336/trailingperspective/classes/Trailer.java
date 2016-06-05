@@ -16,6 +16,7 @@ public class Trailer implements ITrailer {
     private UUID trailingPlayerUuid;
     private long startTime;
     private long currentTrailingStartTime;
+    private boolean wasSentHome;
 
     public Trailer(Player player) {
         this.previousTrailed = new ArrayList<String>();
@@ -39,6 +40,14 @@ public class Trailer implements ITrailer {
         return Bukkit.getPlayer(uuid) != null;
     }
 
+    public boolean wasSentHome() {
+        return this.wasSentHome;
+    }
+
+    public void setWhetherTheyHaveBeenSentHome(boolean sent) {
+        this.wasSentHome = sent;
+    }
+
     public Long getTotalTimeTrailing() {
         return this.startTime == 0 ? this.startTime : System.currentTimeMillis() - this.startTime;
     }
@@ -52,6 +61,7 @@ public class Trailer implements ITrailer {
     }
 
     public void setPlayerCurrentlyTrailing(Player player) {
+        this.wasSentHome = false;
         this.trailingPlayerUuid = player.getUniqueId();
         this.currentTrailingStartTime = System.currentTimeMillis();
         this.previousTrailed.add(player.getName());

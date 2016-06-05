@@ -11,7 +11,9 @@ import org.bukkit.command.CommandSender;
  */
 public enum Permissions {
     /** The permission for the toggle being a trailer command, defaults to op. */
-    TOGGLE_BEING_TRAILER("trailingperspective.togglebeingtrailer");
+    TOGGLE_BEING_TRAILER("trailingperspective.togglebeingtrailer"),
+    /** The permission for being able to set the trailer's home location, defaults to op. */
+    SET_TRAILER_HOME("trailingperspective.settrailerhome");
 
     private String node;
 

@@ -7,6 +7,10 @@ load: POSTWORLD
 commands:
   togglebeingtrailer:
     description: Toggles you being a trailer of others perspectives.
+  settrailerhome:
+    description: Sets the home for all of the trailers
 permissions:
   trailingperspective.togglebeingtrailer:
+    default: op
+  trailingperspective.settrailerhome:
     default: op

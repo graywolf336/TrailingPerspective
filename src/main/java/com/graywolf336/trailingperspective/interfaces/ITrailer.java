@@ -42,6 +42,20 @@ public interface ITrailer {
     public boolean isOnline();
 
     /**
+     * Checks whether this trailer was sent home already or not.
+     *
+     * @return whether the trailer was sent home already
+     */
+    public boolean wasSentHome();
+
+    /**
+     * Sets whether this trailer has been sent home.
+     *
+     * @param sent whether they're sent home or not
+     */
+    public void setWhetherTheyHaveBeenSentHome(boolean sent);
+
+    /**
      * Gets the amount of time this trailer has been trailing perspectives.
      *
      * @return the amount of time in milliseconds this person has been a trailer
@@ -58,7 +72,8 @@ public interface ITrailer {
     /**
      * Gets the amount of time this trailer has been trailing the current perspective.
      *
-     * @return the amount of time in milliseconds this person has been trailing this particular perspective.
+     * @return the amount of time in milliseconds this person has been trailing this particular
+     *         perspective.
      */
     public Long getCurrentPerspectiveTrailingTime();
 

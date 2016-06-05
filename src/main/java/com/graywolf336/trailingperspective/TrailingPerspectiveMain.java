@@ -2,11 +2,13 @@ package com.graywolf336.trailingperspective;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.graywolf336.trailingperspective.commands.ToggleBeingTrailer;
+import com.graywolf336.trailingperspective.commands.SetTrailerHomeCommand;
+import com.graywolf336.trailingperspective.commands.ToggleBeingTrailerCommand;
 import com.graywolf336.trailingperspective.enums.Settings;
 import com.graywolf336.trailingperspective.interfaces.ITrailerManager;
 import com.graywolf336.trailingperspective.listeners.TrailingPerspectivePlayerListener;
 import com.graywolf336.trailingperspective.managers.TrailerManager;
+import com.graywolf336.trailingperspective.workers.HomeSendingWorker;
 import com.graywolf336.trailingperspective.workers.SpectatorSetWorker;
 import com.graywolf336.trailingperspective.workers.TrailerInformationWorker;
 import com.graywolf336.trailingperspective.workers.TrailersPerspectiveWorker;
@@ -17,11 +19,12 @@ public class TrailingPerspectiveMain extends JavaPlugin {
 
     public void onLoad() {
         this.saveDefaultConfig();
-        Settings.setPlugin(this);
-        this.debug = Settings.DEBUG.asBoolean();
     }
 
     public void onEnable() {
+        Settings.setPlugin(this);
+        this.debug = Settings.DEBUG.asBoolean();
+        
         this.trailerManager = new TrailerManager();
         this.getServer().getPluginManager().registerEvents(new TrailingPerspectivePlayerListener(this), this);
         this.setupCommands();
@@ -65,14 +68,19 @@ public class TrailingPerspectiveMain extends JavaPlugin {
     }
 
     private void setupCommands() {
-        ToggleBeingTrailer toggleCmd = new ToggleBeingTrailer(this);
+        ToggleBeingTrailerCommand toggleCmd = new ToggleBeingTrailerCommand(this);
         this.getCommand("togglebeingtrailer").setExecutor(toggleCmd);
         this.getCommand("togglebeingtrailer").setTabCompleter(toggleCmd);
+        
+        SetTrailerHomeCommand homeCmd = new SetTrailerHomeCommand();
+        this.getCommand("settrailerhome").setExecutor(homeCmd);
+        this.getCommand("settrailerhome").setTabCompleter(homeCmd);
     }
 
     private void setupWorkers() {
         this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new SpectatorSetWorker(this), 20, 5);
         this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new TrailersPerspectiveWorker(this), 20, 10);
         this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new TrailerInformationWorker(this), 20, 10);
+        this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new HomeSendingWorker(this), 20, 20);
     }
 }

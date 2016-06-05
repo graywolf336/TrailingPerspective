@@ -2,6 +2,7 @@ package com.graywolf336.trailingperspective.enums;
 
 import java.util.List;
 
+import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
 
 /**
@@ -21,7 +22,9 @@ public enum Settings {
     /** Determines whether or not the user is taken over upon logging in. */
     AUTOMATICALLY_ENABLED("perspective.automatically-enabled"),
     /** Determines whether or not to clear the trailer's chat they get. */
-    CLEAR_TRAILERS_CHAT("perspective.clear-chat");
+    CLEAR_TRAILERS_CHAT("perspective.clear-chat"),
+    /** The setting where the trailers go when there is no one to trail on. */
+    HOME_LOCATION("perspective.home-location");
 
     private static Plugin pl;
     private String path;
@@ -44,6 +47,15 @@ public enum Settings {
 
     public List<String> asStringList() {
         return pl.getConfig().getStringList(path);
+    }
+
+    public Location asLocation() {
+        return (Location) pl.getConfig().get(path);
+    }
+
+    public void setAndSave(Object obj) {
+        pl.getConfig().set(path, obj);
+        pl.saveConfig();
     }
 
     public static void setPlugin(Plugin plugin) {
