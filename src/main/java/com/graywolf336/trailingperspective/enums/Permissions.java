@@ -13,7 +13,11 @@ public enum Permissions {
     /** The permission for the toggle being a trailer command, defaults to op. */
     TOGGLE_BEING_TRAILER("trailingperspective.togglebeingtrailer"),
     /** The permission for being able to set the trailer's home location, defaults to op. */
-    SET_TRAILER_HOME("trailingperspective.settrailerhome");
+    SET_TRAILER_HOME("trailingperspective.settrailerhome"),
+    /** The permission for being able to manually trigger the switch to the next perspective for <strong>yourself</strong>, defaults to op. */
+    SWITCH_PERSPECTIVE("trailingperspective.switchperspective"),
+    /** The permission for being able to manually trigger the switch to the next perspective for <strong>others</strong>, defaults to op. */
+    SWITCH_PERSPECTIVE_OTHERS("trailingperspective.switchperspective.others");
 
     private String node;
 

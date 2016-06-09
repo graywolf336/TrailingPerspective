@@ -8,9 +8,15 @@ commands:
   togglebeingtrailer:
     description: Toggles you being a trailer of others perspectives.
   settrailerhome:
-    description: Sets the home for all of the trailers
+    description: Sets the home for all of the trailers.
+  switchperspective:
+    description: Flags the trailer to have their perspective switched.
 permissions:
   trailingperspective.togglebeingtrailer:
     default: op
   trailingperspective.settrailerhome:
+    default: op
+  trailingperspective.switchperspective:
+    default: op
+  trailingperspective.switchperspective.others:
     default: op

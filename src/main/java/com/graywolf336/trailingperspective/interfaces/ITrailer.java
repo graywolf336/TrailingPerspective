@@ -100,6 +100,9 @@ public interface ITrailer {
 
     /** Sets that this trailer is no longer trailing anyone. */
     public void setNoLongerTrailingAnyone();
+    
+    /** Flags that this trailer is ready to switch perspectives. */
+    public void flagReadyToGoNext();
 
     /**
      * Gets a list of the usernames who this trailer has trailed.

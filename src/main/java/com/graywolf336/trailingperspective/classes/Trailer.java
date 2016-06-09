@@ -79,6 +79,10 @@ public class Trailer implements ITrailer {
         this.trailingPlayerUuid = null;
         this.currentTrailingStartTime = 0L;
     }
+    
+    public void flagReadyToGoNext() {
+        this.currentTrailingStartTime = 0L;
+    }
 
     public List<String> getPlayersLastTrailed() {
         return this.previousTrailed;
