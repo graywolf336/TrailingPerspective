@@ -25,7 +25,7 @@ public class TrailingPerspectiveMain extends JavaPlugin {
     public void onEnable() {
         Settings.setPlugin(this);
         this.debug = Settings.DEBUG.asBoolean();
-        
+
         this.trailerManager = new TrailerManager();
         this.getServer().getPluginManager().registerEvents(new TrailingPerspectivePlayerListener(this), this);
         this.setupCommands();
@@ -72,11 +72,11 @@ public class TrailingPerspectiveMain extends JavaPlugin {
         ToggleBeingTrailerCommand toggleCmd = new ToggleBeingTrailerCommand(this);
         this.getCommand("togglebeingtrailer").setExecutor(toggleCmd);
         this.getCommand("togglebeingtrailer").setTabCompleter(toggleCmd);
-        
+
         SetTrailerHomeCommand homeCmd = new SetTrailerHomeCommand();
         this.getCommand("settrailerhome").setExecutor(homeCmd);
         this.getCommand("settrailerhome").setTabCompleter(homeCmd);
-        
+
         SwitchPerspectiveCommand switchCmd = new SwitchPerspectiveCommand(this);
         this.getCommand("switchperspective").setExecutor(switchCmd);
         this.getCommand("switchperspective").setTabCompleter(switchCmd);
