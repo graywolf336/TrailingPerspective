@@ -19,7 +19,7 @@ public class HomeSendingWorker implements ITrailerWorker {
         if(Settings.HOME_LOCATION.asLocation() == null) return;
         
         for(ITrailer trailer : this.pl.getTrailerManager().getTrailers()) {
-            if(trailer.isOnline() && !trailer.isCurrentlyTrailingSomeone() && !trailer.wasSentHome()) {
+            if(trailer.isOnline() && !trailer.isCurrentlyTrailingSomeone() && !trailer.wasSentHome() && this.pl.getServer().getOnlinePlayers().size() <= this.pl.getTrailerManager().getTrailers().size()) {
                 trailer.getPlayer().teleport(Settings.HOME_LOCATION.asLocation());
                 trailer.setWhetherTheyHaveBeenSentHome(true);
                 
