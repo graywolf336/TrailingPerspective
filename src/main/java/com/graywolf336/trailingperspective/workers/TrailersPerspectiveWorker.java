@@ -51,14 +51,12 @@ public class TrailersPerspectiveWorker implements ITrailerWorker {
                 if (p == null) {
                     trailer.setNoLongerTrailingAnyone();
                 } else {
-                    trailer.setPlayerCurrentlyTrailing(p);
-                    trailer.getPlayer().teleport(p);
                     trailer.getPlayer().setSpectatorTarget(null);
+                    trailer.setPlayerCurrentlyTrailing(p);
 
                     final Player target = p;
-                    this.pl.getServer().getScheduler().runTaskLater(this.pl, () -> {
-                        trailer.getPlayer().setSpectatorTarget(target);
-                    }, 2L);
+                    this.pl.getServer().getScheduler().runTaskLater(this.pl, () -> trailer.getPlayer().teleport(target), 1L);
+                    this.pl.getServer().getScheduler().runTaskLater(this.pl, () -> trailer.getPlayer().setSpectatorTarget(target), 3L);
 
                     this.pl.getLogger().info(trailer.getUsername() + " is now trailing the perspective of " + p.getName());
                     trailer.getPlayer().sendTitle("", ChatColor.GREEN + "Now Trailing: " + p.getDisplayName());
