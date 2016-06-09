@@ -12,6 +12,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 
 import com.graywolf336.trailingperspective.TrailingPerspectiveMain;
 import com.graywolf336.trailingperspective.classes.Trailer;
@@ -43,6 +44,13 @@ public class TrailingPerspectivePlayerListener implements Listener {
     public void playerDoneDied(PlayerDeathEvent event) {
         if (this.pl.getTrailerManager().isBeingTrailed(event.getEntity().getUniqueId())) {
             pl.getTrailerManager().getTrailersTrailingPlayer(event.getEntity().getUniqueId()).forEach(t -> t.setNoLongerTrailingAnyone());
+        }
+    }
+    
+    @EventHandler
+    public void playerTeleportedSomeWhere(PlayerTeleportEvent event) {
+        if (this.pl.getTrailerManager().isBeingTrailed(event.getPlayer().getUniqueId())) {
+            pl.getTrailerManager().getTrailersTrailingPlayer(event.getPlayer().getUniqueId()).forEach(t -> t.flagReadyToGoNext());
         }
     }
 
