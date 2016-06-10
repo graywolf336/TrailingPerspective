@@ -1,16 +1,21 @@
 package com.graywolf336.trailingperspective;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import com.graywolf336.trailingperspective.interfaces.ITrailer;
+
 public class Util {
     private final static Pattern DURATION_PATTERN = Pattern.compile("^(\\d+)\\s*(m(?:inute)?s?|h(?:ours?)?|d(?:ays?)?|s(?:econd)?s?)?$", Pattern.CASE_INSENSITIVE);
+    private final static Random random = new Random(System.currentTimeMillis());
 
     /**
      * Converts a string like '20minutes' into the appropriate amount of milliseconds.
@@ -92,14 +97,22 @@ public class Util {
     }
 
     /**
-     * Gets a random {@link Player} whose name is not equal to the given name
+     * Gets a random {@link Player} whose name is not a trailer or in the given list of usernames.
      *
+     * @param trailers the list of {@link ITrailer trailers}
      * @param names the names to ignore.
      * @return a random {@link Player} <strong>OR</strong> null
      */
-    public static Player getRandomAlivePlayerNotInList(String... names) {
-        List<String> namesToCheck = Arrays.asList(names);
+    public static Player getRandomAlivePlayerNotInList(List<ITrailer> trailers, String... names) {
+        List<String> namesToCheck = new ArrayList<String>();
+        namesToCheck.addAll(trailers.stream().map(t -> t.getUsername()).collect(Collectors.toList()));
+        
+        for(String s : names) {
+            namesToCheck.add(s);
+        }
 
-        return Bukkit.getOnlinePlayers().stream().filter(p -> !namesToCheck.contains(p.getName()) && !p.isDead()).findAny().orElse(null);
+        List<Player> players = Bukkit.getOnlinePlayers().stream().filter(p -> !namesToCheck.contains(p.getName()) && !p.isDead()).collect(Collectors.toList());
+        
+        return players.isEmpty() ? null : players.get(random.nextInt(players.size() - 1));
     }
 }

@@ -108,8 +108,6 @@ public interface ITrailer {
      * Gets a list of the usernames who this trailer has trailed.
      *
      * @return a string list of the usernames who this trailer trailed
-     * @deprecated TODO: Make this a solid method that won't change again
      */
-    @Deprecated
     public List<String> getPlayersLastTrailed();
 }

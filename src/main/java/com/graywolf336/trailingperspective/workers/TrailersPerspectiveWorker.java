@@ -1,5 +1,7 @@
 package com.graywolf336.trailingperspective.workers;
 
+import java.util.ArrayList;
+
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -25,20 +27,21 @@ public class TrailersPerspectiveWorker implements ITrailerWorker {
         if (this.pl.getServer().getOnlinePlayers().size() <= this.pl.getTrailerManager().getTrailers().size())
             return;
 
-        for (ITrailer trailer : this.pl.getTrailerManager().getTrailers()) {
+        ArrayList<ITrailer> trailers = new ArrayList<ITrailer>(this.pl.getTrailerManager().getTrailers());
+        for (ITrailer trailer : trailers) {
             if (trailer.isOnline() && trailer.getPlayer().getGameMode() == GameMode.SPECTATOR && (trailer.getCurrentPerspectiveTrailingTime() > this.changeInterval || trailer.getCurrentPerspectiveTrailingTime() == 0)) {
                 Player p = null;
 
                 // Check if they have trailed someone yet or not
                 if (trailer.getPlayersLastTrailed().isEmpty()) {
-                    p = Util.getRandomAlivePlayerNotInList(trailer.getPlayer().getName());
+                    p = Util.getRandomAlivePlayerNotInList(trailers);
                 } else {
                     String lastUser = trailer.getPlayersLastTrailed().get(trailer.getPlayersLastTrailed().size() - 1);
-                    p = Util.getRandomAlivePlayerNotInList(trailer.getPlayer().getName(), lastUser);
+                    p = Util.getRandomAlivePlayerNotInList(trailers, lastUser);
 
                     // if we couldn't get anyone, then just get someone who isn't this trailer
                     if (p == null) {
-                        p = Util.getRandomAlivePlayerNotInList(trailer.getPlayer().getName());
+                        p = Util.getRandomAlivePlayerNotInList(trailers);
                     }
 
                     // If the player isn't null and it's the same player as who was before,
