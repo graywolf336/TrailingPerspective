@@ -113,6 +113,13 @@ public class Util {
 
         List<Player> players = Bukkit.getOnlinePlayers().stream().filter(p -> !namesToCheck.contains(p.getName()) && !p.isDead()).collect(Collectors.toList());
         
-        return players.isEmpty() ? null : players.get(random.nextInt(players.size() - 1));
+        switch(players.size()) {
+            case 0:
+                return null;
+            case 1:
+                return players.get(0);
+            default:
+                return players.get(random.nextInt(players.size() - 1));
+        }
     }
 }
