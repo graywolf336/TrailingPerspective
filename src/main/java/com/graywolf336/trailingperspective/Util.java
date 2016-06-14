@@ -104,6 +104,7 @@ public class Util {
      * @return a random {@link Player} <strong>OR</strong> null
      */
     public static Player getRandomAlivePlayerNotInList(List<ITrailer> trailers, String... names) {
+        Essentials ess = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
         List<String> namesToCheck = new ArrayList<String>();
         namesToCheck.addAll(trailers.stream().map(t -> t.getUsername()).collect(Collectors.toList()));
         
@@ -111,7 +112,7 @@ public class Util {
             namesToCheck.add(s);
         }
 
-        List<Player> players = Bukkit.getOnlinePlayers().stream().filter(p -> !namesToCheck.contains(p.getName()) && !p.isDead()).collect(Collectors.toList());
+        List<Player> players = Bukkit.getOnlinePlayers().stream().filter(p -> !namesToCheck.contains(p.getName()) && !p.isDead() && !ess.getUser(p.getName()).isAfk()).collect(Collectors.toList());
         
         switch(players.size()) {
             case 0:
