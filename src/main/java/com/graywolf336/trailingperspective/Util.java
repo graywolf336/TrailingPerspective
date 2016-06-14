@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import com.earth2me.essentials.Essentials;
 import com.graywolf336.trailingperspective.interfaces.ITrailer;
 
 public class Util {
@@ -107,14 +108,14 @@ public class Util {
         Essentials ess = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
         List<String> namesToCheck = new ArrayList<String>();
         namesToCheck.addAll(trailers.stream().map(t -> t.getUsername()).collect(Collectors.toList()));
-        
-        for(String s : names) {
+
+        for (String s : names) {
             namesToCheck.add(s);
         }
 
         List<Player> players = Bukkit.getOnlinePlayers().stream().filter(p -> !namesToCheck.contains(p.getName()) && !p.isDead() && !ess.getUser(p.getName()).isAfk()).collect(Collectors.toList());
-        
-        switch(players.size()) {
+
+        switch (players.size()) {
             case 0:
                 return null;
             case 1:
