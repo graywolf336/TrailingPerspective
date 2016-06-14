@@ -2,7 +2,7 @@ name: TrailingPerspective
 main: com.graywolf336.trailingperspective.TrailingPerspectiveMain
 version: maven-version-number
 authors: [graywolf336]
-softdepend: [WorldEdit, Vault]
+softdepend: [WorldEdit, Vault, Essentials]
 load: POSTWORLD
 commands:
   togglebeingtrailer:
