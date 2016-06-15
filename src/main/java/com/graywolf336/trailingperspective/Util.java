@@ -15,6 +15,7 @@ import com.earth2me.essentials.Essentials;
 import com.graywolf336.trailingperspective.interfaces.ITrailer;
 
 public class Util {
+    public final static int TICKS_PER_SECOND = 20;
     private final static Pattern DURATION_PATTERN = Pattern.compile("^(\\d+)\\s*(m(?:inute)?s?|h(?:ours?)?|d(?:ays?)?|s(?:econd)?s?)?$", Pattern.CASE_INSENSITIVE);
     private final static Random random = new Random(System.currentTimeMillis());
 

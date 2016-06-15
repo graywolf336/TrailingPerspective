@@ -24,7 +24,11 @@ public enum Settings {
     /** Determines whether or not to clear the trailer's chat they get. */
     CLEAR_TRAILERS_CHAT("perspective.clear-chat"),
     /** The setting where the trailers go when there is no one to trail on. */
-    HOME_LOCATION("perspective.home-location");
+    HOME_LOCATION("perspective.home-location"),
+    /** The setting which controls at what light level the perspective gets night vision. */
+    LIGHT_LEVEL_FOR_NIGHT_VISION("perspective.night-vision.light-level"),
+    /** The setting which controls how long the night vision potion lasts in seconds. */
+    NIGHT_VISION_POTION_LENGTH_SECONDS("perspective.night-vision.length-in-seconds");
 
     private static Plugin pl;
     private String path;
@@ -39,6 +43,10 @@ public enum Settings {
 
     public int asInt() {
         return pl.getConfig().getInt(path);
+    }
+    
+    public byte asByte() {
+        return Byte.valueOf(pl.getConfig().getString(path)).byteValue();
     }
 
     public String asString() {
