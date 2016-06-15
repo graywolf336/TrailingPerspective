@@ -18,6 +18,7 @@ public class TrailingPerspectiveEssentialsListener implements Listener {
     @EventHandler
     public void playerHasGoneAfk(AfkStatusChangeEvent event) {
     	IUser user = event.getAffected();
+    	
     	if(user.isAfk() && this.pl.getTrailerManager().isBeingTrailed(user.getBase().getUniqueId())) {
     		pl.getTrailerManager().getTrailersTrailingPlayer(user.getBase().getUniqueId()).forEach(t -> t.setNoLongerTrailingAnyone());
     	}
