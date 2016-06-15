@@ -6,3 +6,8 @@ A Bukkit plugin for trailing someone's perspective.
 ## Contributors
 * [graywolf336](https://github.com/graywolf336)
 * [dawgeth](https://github.com/dawgeth)
+
+## Contributing
+We happily accept any additions to the project and enjoy discussing items before they're merged in.
+
+This project has switched over to pull requests being merged to master branch, nothing should be pushed directly to the master branch.
