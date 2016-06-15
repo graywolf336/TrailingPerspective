@@ -50,7 +50,7 @@ public class TrailingPerspectivePlayerListener implements Listener {
     
     @EventHandler
     public void playerTeleportedSomeWhere(PlayerTeleportEvent event) {
-    	toggleTrailerTrailingPlayer(event.getPlayer());
+        toggleTrailerTrailingPlayer(event.getPlayer());
     }
     
     @EventHandler
