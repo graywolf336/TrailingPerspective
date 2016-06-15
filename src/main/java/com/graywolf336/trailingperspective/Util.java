@@ -80,7 +80,7 @@ public class Util {
         return getDurationString(days, hours, minutes, seconds);
     }
 
-    private static String getDurationString(long days, long hours, long minutes, long seconds){
+    private static String getDurationString(long days, long hours, long minutes, long seconds) {
         StringBuilder sb = new StringBuilder();
         if (days > 0) {
             sb.append(days);
@@ -99,10 +99,10 @@ public class Util {
 
         sb.append(seconds);
         sb.append(" second" + (seconds == 1 ? "" : "s"));
-        
+
         return sb.toString();
     }
-    
+
     /**
      * Gets a random {@link Player} whose name is not a trailer or in the given list of usernames.
      *
