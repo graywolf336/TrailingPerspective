@@ -7,6 +7,7 @@ import com.graywolf336.trailingperspective.commands.SwitchPerspectiveCommand;
 import com.graywolf336.trailingperspective.commands.ToggleBeingTrailerCommand;
 import com.graywolf336.trailingperspective.enums.Settings;
 import com.graywolf336.trailingperspective.interfaces.ITrailerManager;
+import com.graywolf336.trailingperspective.listeners.TrailingPerspectiveEssentialsListener;
 import com.graywolf336.trailingperspective.listeners.TrailingPerspectivePlayerListener;
 import com.graywolf336.trailingperspective.managers.TrailerManager;
 import com.graywolf336.trailingperspective.workers.HomeSendingWorker;
@@ -28,6 +29,7 @@ public class TrailingPerspectiveMain extends JavaPlugin {
 
         this.trailerManager = new TrailerManager();
         this.getServer().getPluginManager().registerEvents(new TrailingPerspectivePlayerListener(this), this);
+        this.getServer().getPluginManager().registerEvents(new TrailingPerspectiveEssentialsListener(this), this);
         this.setupCommands();
         this.setupWorkers();
     }

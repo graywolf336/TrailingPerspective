@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.bukkit.GameMode;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,6 +14,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.vehicle.VehicleEnterEvent;
 
 import com.graywolf336.trailingperspective.TrailingPerspectiveMain;
 import com.graywolf336.trailingperspective.classes.Trailer;
@@ -52,6 +54,21 @@ public class TrailingPerspectivePlayerListener implements Listener {
         if (this.pl.getTrailerManager().isBeingTrailed(event.getPlayer().getUniqueId())) {
             pl.getTrailerManager().getTrailersTrailingPlayer(event.getPlayer().getUniqueId()).forEach(t -> t.flagReadyToGoNext());
         }
+    }
+    
+    @EventHandler
+    public void playerHoppedARide(VehicleEnterEvent event)
+    {
+    	Entity passenger = event.getEntered().getPassenger();
+    	
+    	if(passenger instanceof Player)
+    	{
+    		Player player = (Player) passenger;
+    		
+            if (this.pl.getTrailerManager().isBeingTrailed(player.getUniqueId())) {
+                pl.getTrailerManager().getTrailersTrailingPlayer(player.getUniqueId()).forEach(t -> t.setNoLongerTrailingAnyone());
+            }
+    	}
     }
 
     @EventHandler
