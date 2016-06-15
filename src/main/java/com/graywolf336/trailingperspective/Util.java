@@ -65,17 +65,22 @@ public class Util {
      * @return A string of the form "X days Y hours Z minutes A seconds".
      */
     public static String getDurationBreakdown(long millis) {
-        if (millis < 0)
+        long ms = millis;
+        if (ms < 0)
             return "ASAP";
 
-        long days = TimeUnit.MILLISECONDS.toDays(millis);
-        millis -= TimeUnit.DAYS.toMillis(days);
-        long hours = TimeUnit.MILLISECONDS.toHours(millis);
-        millis -= TimeUnit.HOURS.toMillis(hours);
-        long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
-        millis -= TimeUnit.MINUTES.toMillis(minutes);
-        long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
+        long days = TimeUnit.MILLISECONDS.toDays(ms);
+        ms -= TimeUnit.DAYS.toMillis(days);
+        long hours = TimeUnit.MILLISECONDS.toHours(ms);
+        ms -= TimeUnit.HOURS.toMillis(hours);
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(ms);
+        ms -= TimeUnit.MINUTES.toMillis(minutes);
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(ms);
 
+        return getDurationString(days, hours, minutes, seconds);
+    }
+
+    private static String getDurationString(long days, long hours, long minutes, long seconds){
         StringBuilder sb = new StringBuilder();
         if (days > 0) {
             sb.append(days);
@@ -94,10 +99,10 @@ public class Util {
 
         sb.append(seconds);
         sb.append(" second" + (seconds == 1 ? "" : "s"));
-
+        
         return sb.toString();
     }
-
+    
     /**
      * Gets a random {@link Player} whose name is not a trailer or in the given list of usernames.
      *
