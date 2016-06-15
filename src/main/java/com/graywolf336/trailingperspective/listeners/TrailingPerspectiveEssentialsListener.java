@@ -14,13 +14,13 @@ public class TrailingPerspectiveEssentialsListener implements Listener {
     public TrailingPerspectiveEssentialsListener(TrailingPerspectiveMain plugin) {
         this.pl = plugin;
     }
-    
+
     @EventHandler
     public void playerHasGoneAfk(AfkStatusChangeEvent event) {
         IUser user = event.getAffected();
 
-        if(user.isAfk() && this.pl.getTrailerManager().isBeingTrailed(user.getBase().getUniqueId())) {
+        if (user.isAfk() && this.pl.getTrailerManager().isBeingTrailed(user.getBase().getUniqueId())) {
             pl.getTrailerManager().getTrailersTrailingPlayer(user.getBase().getUniqueId()).forEach(t -> t.setNoLongerTrailingAnyone());
-    	}
+        }
     }
 }

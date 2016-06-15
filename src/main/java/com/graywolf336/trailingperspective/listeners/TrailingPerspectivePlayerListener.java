@@ -47,23 +47,23 @@ public class TrailingPerspectivePlayerListener implements Listener {
     public void playerDoneDied(PlayerDeathEvent event) {
         toggleTrailerTrailingPlayer(event.getEntity());
     }
-    
+
     @EventHandler
     public void playerTeleportedSomeWhere(PlayerTeleportEvent event) {
         toggleTrailerTrailingPlayer(event.getPlayer());
     }
-    
+
     @EventHandler
-    public void playerHoppedARide(VehicleEnterEvent event){
+    public void playerHoppedARide(VehicleEnterEvent event) {
         Entity passenger = event.getEntered().getPassenger();
 
-        if(passenger instanceof Player) {
+        if (passenger instanceof Player) {
             Player player = (Player) passenger;
 
             toggleTrailerTrailingPlayer(player);
-    	}
+        }
     }
-    
+
     @EventHandler
     public void playerTookANap(PlayerBedEnterEvent event) {
         toggleTrailerTrailingPlayer(event.getPlayer());
@@ -101,7 +101,7 @@ public class TrailingPerspectivePlayerListener implements Listener {
             toggleTrailerTrailingPlayer(player);
         }
     }
-    
+
     private void toggleTrailerTrailingPlayer(Player player) {
         if (this.pl.getTrailerManager().isBeingTrailed(player.getUniqueId())) {
             pl.getTrailerManager().getTrailersTrailingPlayer(player.getUniqueId()).forEach(t -> t.setNoLongerTrailingAnyone());
