@@ -59,7 +59,7 @@ public class TrailingPerspectivePlayerListener implements Listener {
 
         if(passenger instanceof Player) {
             Player player = (Player) passenger;
-    		
+
             toggleTrailerTrailingPlayer(player);
     	}
     }
@@ -102,8 +102,7 @@ public class TrailingPerspectivePlayerListener implements Listener {
         }
     }
     
-    private void toggleTrailerTrailingPlayer(Player player)
-    {
+    private void toggleTrailerTrailingPlayer(Player player) {
         if (this.pl.getTrailerManager().isBeingTrailed(player.getUniqueId())) {
             pl.getTrailerManager().getTrailersTrailingPlayer(player.getUniqueId()).forEach(t -> t.setNoLongerTrailingAnyone());
         }
