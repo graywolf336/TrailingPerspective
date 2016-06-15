@@ -5,3 +5,6 @@ perspective:
   change-interval: 5minutes
   automatically-enabled: true
   clear-chat: true
+  night-vision:
+    light-level: 10
+    length-in-seconds: 30
