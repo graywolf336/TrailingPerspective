@@ -21,6 +21,8 @@ public class TrailingPerspectiveMain extends JavaPlugin {
 
     public void onLoad() {
         this.saveDefaultConfig();
+        
+        TrailingPerspectiveAPI.setPlugin(this);
     }
 
     public void onEnable() {
