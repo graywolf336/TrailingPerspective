@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerBedEnterEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -44,31 +45,29 @@ public class TrailingPerspectivePlayerListener implements Listener {
 
     @EventHandler
     public void playerDoneDied(PlayerDeathEvent event) {
-        if (this.pl.getTrailerManager().isBeingTrailed(event.getEntity().getUniqueId())) {
-            pl.getTrailerManager().getTrailersTrailingPlayer(event.getEntity().getUniqueId()).forEach(t -> t.setNoLongerTrailingAnyone());
-        }
+        toggleTrailerTrailingPlayer(event.getEntity());
     }
     
     @EventHandler
     public void playerTeleportedSomeWhere(PlayerTeleportEvent event) {
-        if (this.pl.getTrailerManager().isBeingTrailed(event.getPlayer().getUniqueId())) {
-            pl.getTrailerManager().getTrailersTrailingPlayer(event.getPlayer().getUniqueId()).forEach(t -> t.flagReadyToGoNext());
-        }
+    	toggleTrailerTrailingPlayer(event.getPlayer());
     }
     
     @EventHandler
     public void playerHoppedARide(VehicleEnterEvent event)
     {
-    	Entity passenger = event.getEntered().getPassenger();
+        Entity passenger = event.getEntered().getPassenger();
     	
-    	if(passenger instanceof Player)
-    	{
-    		Player player = (Player) passenger;
+        if(passenger instanceof Player) {
+            Player player = (Player) passenger;
     		
-            if (this.pl.getTrailerManager().isBeingTrailed(player.getUniqueId())) {
-                pl.getTrailerManager().getTrailersTrailingPlayer(player.getUniqueId()).forEach(t -> t.setNoLongerTrailingAnyone());
-            }
+            toggleTrailerTrailingPlayer(player);
     	}
+    }
+    
+    @EventHandler
+    public void playerTookANap(PlayerBedEnterEvent event) {
+        toggleTrailerTrailingPlayer(event.getPlayer());
     }
 
     @EventHandler
@@ -100,6 +99,13 @@ public class TrailingPerspectivePlayerListener implements Listener {
         } else if (this.pl.getTrailerManager().isBeingTrailed(player.getUniqueId())) {
             this.pl.debug(false, "A person who is being trailed has left us.");
 
+            toggleTrailerTrailingPlayer(player);
+        }
+    }
+    
+    private void toggleTrailerTrailingPlayer(Player player)
+    {
+        if (this.pl.getTrailerManager().isBeingTrailed(player.getUniqueId())) {
             pl.getTrailerManager().getTrailersTrailingPlayer(player.getUniqueId()).forEach(t -> t.setNoLongerTrailingAnyone());
         }
     }
