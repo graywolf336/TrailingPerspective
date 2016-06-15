@@ -65,35 +65,47 @@ public class Util {
      * @return A string of the form "X days Y hours Z minutes A seconds".
      */
     public static String getDurationBreakdown(long millis) {
-        if (millis < 0)
+        long ms = millis;
+        if (ms < 0)
             return "ASAP";
 
-        long days = TimeUnit.MILLISECONDS.toDays(millis);
-        millis -= TimeUnit.DAYS.toMillis(days);
-        long hours = TimeUnit.MILLISECONDS.toHours(millis);
-        millis -= TimeUnit.HOURS.toMillis(hours);
-        long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
-        millis -= TimeUnit.MINUTES.toMillis(minutes);
-        long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
+        long days = TimeUnit.MILLISECONDS.toDays(ms);
+        ms -= TimeUnit.DAYS.toMillis(days);
+        long hours = TimeUnit.MILLISECONDS.toHours(ms);
+        ms -= TimeUnit.HOURS.toMillis(hours);
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(ms);
+        ms -= TimeUnit.MINUTES.toMillis(minutes);
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(ms);
 
+        return getDurationString(days, hours, minutes, seconds);
+    }
+
+    private static String getDurationString(long days, long hours, long minutes, long seconds) {
         StringBuilder sb = new StringBuilder();
         if (days > 0) {
             sb.append(days);
-            sb.append(" day" + (days == 1 ? "" : "s") + " ");
+            sb.append(" day");
+            sb.append(days == 1 ? "" : "s");
+            sb.append(" ");
         }
 
         if (days > 0 || hours > 0) {
             sb.append(hours);
-            sb.append(" hour" + (hours == 1 ? "" : "s") + " ");
+            sb.append(" hour");
+            sb.append(hours == 1 ? "" : "s");
+            sb.append(" ");
         }
 
         if (days > 0 || hours > 0 || minutes > 0) {
             sb.append(minutes);
-            sb.append(" minute" + (minutes == 1 ? "" : "s") + " ");
+            sb.append(" minute");
+            sb.append(minutes == 1 ? "" : "s");
+            sb.append(" ");
         }
 
         sb.append(seconds);
-        sb.append(" second" + (seconds == 1 ? "" : "s"));
+        sb.append(" second");
+        sb.append(seconds == 1 ? "" : "s");
 
         return sb.toString();
     }
