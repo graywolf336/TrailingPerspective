@@ -54,10 +54,9 @@ public class TrailingPerspectivePlayerListener implements Listener {
     }
     
     @EventHandler
-    public void playerHoppedARide(VehicleEnterEvent event)
-    {
+    public void playerHoppedARide(VehicleEnterEvent event){
         Entity passenger = event.getEntered().getPassenger();
-    	
+
         if(passenger instanceof Player) {
             Player player = (Player) passenger;
     		
