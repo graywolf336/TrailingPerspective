@@ -9,9 +9,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.graywolf336.trailingperspective.TrailingPerspectiveMain;
-import com.graywolf336.trailingperspective.classes.Trailer;
 import com.graywolf336.trailingperspective.enums.Permissions;
 import com.graywolf336.trailingperspective.interfaces.ICommand;
+import com.graywolf336.trailingperspective.interfaces.ITrailer;
 
 public class ForceHomeCommand implements ICommand {
     private TrailingPerspectiveMain pl;
@@ -25,7 +25,7 @@ public class ForceHomeCommand implements ICommand {
         Player player = (Player) sender;
 
         if (Permissions.SET_FORCE_HOME.has(sender) && sender instanceof Player) {
-            Trailer trailer = (Trailer) pl.getTrailerManager().getTrailer(player.getUniqueId());
+            ITrailer trailer = pl.getTrailerManager().getTrailer(player.getUniqueId());
 
             if (trailer.isForcedHome()) {
                 trailer.forcePlayerHome();

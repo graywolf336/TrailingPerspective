@@ -111,5 +111,20 @@ public interface ITrailer {
      */
     public List<String> getPlayersLastTrailed();
     
+    /**
+     * Gets whether the trailer is forced to the home position or not.
+     * 
+     * @return whether the trailer is forced to the home position or not.
+     */
     public boolean isForcedHome();
+    
+    /**
+     * Set isForcedHome true
+     */
+    public void forcePlayerHome();
+    
+    /**
+     * Set isForcedHome false
+     */
+    public void unForcePlayerHome();
 }
