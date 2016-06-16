@@ -86,7 +86,7 @@ public class TrailingPerspectiveMain extends JavaPlugin {
         SwitchPerspectiveCommand switchCmd = new SwitchPerspectiveCommand(this);
         this.getCommand("switchperspective").setExecutor(switchCmd);
         this.getCommand("switchperspective").setTabCompleter(switchCmd);
-        
+
         ForceHomeCommand forceHomeCmd = new ForceHomeCommand(this);
         this.getCommand("forcehome").setExecutor(forceHomeCmd);
         this.getCommand("forcehome").setTabCompleter(forceHomeCmd);
