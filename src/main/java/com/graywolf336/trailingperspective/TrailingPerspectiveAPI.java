@@ -11,14 +11,14 @@ import com.graywolf336.trailingperspective.interfaces.ITrailerManager;
  */
 public class TrailingPerspectiveAPI {
     private static TrailingPerspectiveMain plugin;
-    
+
     protected static void setPlugin(TrailingPerspectiveMain pl) {
         plugin = pl;
     }
-    
+
     /**
      * Gets the a valid {@link ITrailerManager} instance.
-     * 
+     *
      * @return {@link ITrailerManager} instance
      */
     public static ITrailerManager getTrailerManager() {

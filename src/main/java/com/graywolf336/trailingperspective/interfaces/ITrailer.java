@@ -110,4 +110,6 @@ public interface ITrailer {
      * @return a string list of the usernames who this trailer trailed
      */
     public List<String> getPlayersLastTrailed();
+    
+    public boolean isForcedHome();
 }

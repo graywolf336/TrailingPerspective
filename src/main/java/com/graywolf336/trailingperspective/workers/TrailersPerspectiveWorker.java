@@ -29,7 +29,7 @@ public class TrailersPerspectiveWorker implements ITrailerWorker {
 
         ArrayList<ITrailer> trailers = new ArrayList<ITrailer>(this.pl.getTrailerManager().getTrailers());
         for (ITrailer trailer : trailers) {
-            if (trailer.isOnline() && trailer.getPlayer().getGameMode() == GameMode.SPECTATOR && (trailer.getCurrentPerspectiveTrailingTime() > this.changeInterval || trailer.getCurrentPerspectiveTrailingTime() == 0)) {
+            if (trailer.isOnline() && trailer.isForcedHome() && trailer.getPlayer().getGameMode() == GameMode.SPECTATOR && (trailer.getCurrentPerspectiveTrailingTime() > this.changeInterval || trailer.getCurrentPerspectiveTrailingTime() == 0)) {
                 Player p = null;
 
                 // Check if they have trailed someone yet or not
