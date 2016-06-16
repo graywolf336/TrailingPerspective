@@ -88,7 +88,7 @@ public class SwitchPerspectiveCommand implements ICommand {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (Permissions.SWITCH_PERSPECTIVE_OTHERS.has(sender)) {
             List<String> results = new ArrayList<String>();
-            for (ITrailer t : this.pl.getTrailerManager().getAllTrailers()) {
+            for (ITrailer t : this.pl.getTrailerManager().getPlayerTrailers()) {
                 if (StringUtil.startsWithIgnoreCase(t.getUsername(), args[0].toLowerCase())) {
                     results.add(t.getUsername());
                 }
