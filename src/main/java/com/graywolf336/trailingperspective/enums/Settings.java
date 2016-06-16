@@ -44,7 +44,7 @@ public enum Settings {
     public int asInt() {
         return pl.getConfig().getInt(path);
     }
-    
+
     public byte asByte() {
         return Byte.valueOf(pl.getConfig().getString(path)).byteValue();
     }

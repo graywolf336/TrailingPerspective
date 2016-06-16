@@ -17,11 +17,13 @@ public class Trailer implements ITrailer {
     private long startTime;
     private long currentTrailingStartTime;
     private boolean wasSentHome;
+    private boolean isForcedHome;
 
     public Trailer(Player player) {
         this.previousTrailed = new ArrayList<String>();
         this.uuid = player.getUniqueId();
         this.cachedUsername = player.getName();
+        this.isForcedHome = false;
     }
 
     public Player getPlayer() {
@@ -86,5 +88,17 @@ public class Trailer implements ITrailer {
 
     public List<String> getPlayersLastTrailed() {
         return this.previousTrailed;
+    }
+
+    public void forcePlayerHome() {
+        this.isForcedHome = true;
+    }
+
+    public void unForcePlayerHome() {
+        this.isForcedHome = false;
+    }
+
+    public boolean isForcedHome() {
+        return this.isForcedHome;
     }
 }

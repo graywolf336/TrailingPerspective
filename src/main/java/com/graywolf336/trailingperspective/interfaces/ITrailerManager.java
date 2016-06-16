@@ -73,7 +73,8 @@ public interface ITrailerManager {
     public boolean isTrailer(UUID uuid);
 
     /**
-     * Checks whether the given player instance is being trailed by a {@link ITrailer trailer} or not.
+     * Checks whether the given player instance is being trailed by a {@link ITrailer trailer} or
+     * not.
      *
      * @param player the player to check
      * @return whether the player is being trailed by a {@link ITrailer trailer} or not.

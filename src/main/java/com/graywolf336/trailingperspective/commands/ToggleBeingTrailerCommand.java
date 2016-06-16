@@ -34,7 +34,7 @@ public class ToggleBeingTrailerCommand implements ICommand {
                 player.sendMessage(ChatColor.GREEN + "You're now a trailer of other's perspectives.");
             }
         } else {
-            sender.sendMessage(ChatColor.DARK_RED + "No permission or you're not a player...I'll let you decided. ;)");
+            sender.sendMessage(ChatColor.DARK_RED + "No permission or you're not a player...I'll let you decide. ;)");
         }
 
         return true;

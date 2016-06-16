@@ -2,6 +2,7 @@ package com.graywolf336.trailingperspective;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.graywolf336.trailingperspective.commands.ForceHomeCommand;
 import com.graywolf336.trailingperspective.commands.SetTrailerHomeCommand;
 import com.graywolf336.trailingperspective.commands.SwitchPerspectiveCommand;
 import com.graywolf336.trailingperspective.commands.ToggleBeingTrailerCommand;
@@ -22,7 +23,7 @@ public class TrailingPerspectiveMain extends JavaPlugin {
 
     public void onLoad() {
         this.saveDefaultConfig();
-        
+
         TrailingPerspectiveAPI.setPlugin(this);
     }
 
@@ -85,6 +86,10 @@ public class TrailingPerspectiveMain extends JavaPlugin {
         SwitchPerspectiveCommand switchCmd = new SwitchPerspectiveCommand(this);
         this.getCommand("switchperspective").setExecutor(switchCmd);
         this.getCommand("switchperspective").setTabCompleter(switchCmd);
+        
+        ForceHomeCommand forceHomeCmd = new ForceHomeCommand(this);
+        this.getCommand("forcehome").setExecutor(forceHomeCmd);
+        this.getCommand("forcehome").setTabCompleter(forceHomeCmd);
     }
 
     private void setupWorkers() {
