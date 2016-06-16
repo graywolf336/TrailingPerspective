@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.graywolf336.trailingperspective.TrailingPerspectiveMain;
-import com.graywolf336.trailingperspective.classes.Trailer;
+import com.graywolf336.trailingperspective.classes.PlayerTrailer;
 import com.graywolf336.trailingperspective.enums.Permissions;
 import com.graywolf336.trailingperspective.interfaces.ICommand;
 
@@ -30,7 +30,7 @@ public class ToggleBeingTrailerCommand implements ICommand {
                 player.setGameMode(GameMode.SURVIVAL);
                 player.sendMessage(ChatColor.RED + "You're no longer a trailer of other's perspectives.");
             } else {
-                pl.getTrailerManager().addTrailer(new Trailer(player));
+                pl.getTrailerManager().addTrailer(new PlayerTrailer(player));
                 player.sendMessage(ChatColor.GREEN + "You're now a trailer of other's perspectives.");
             }
         } else {

@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import com.earth2me.essentials.Essentials;
@@ -106,6 +107,27 @@ public class Util {
         sb.append(seconds);
         sb.append(" second");
         sb.append(seconds == 1 ? "" : "s");
+
+        return sb.toString();
+    }
+
+    /**
+     * Turns "WITHER_SKELETON" into "Wither Skeleton".
+     *
+     * @param entityType the entity type to turn into a nice string
+     * @return the nice format of the entityType
+     */
+    public static String getEntityTypeNiceString(EntityType entityType) {
+        StringBuilder sb = new StringBuilder();
+
+        for (String s : entityType.toString().toLowerCase().split("_")) {
+            sb.append(Character.toUpperCase(s.charAt(0)));
+            sb.append(s.substring(1));
+            sb.append(" ");
+        }
+
+        // Delete the last space
+        sb.deleteCharAt(sb.length() - 1);
 
         return sb.toString();
     }

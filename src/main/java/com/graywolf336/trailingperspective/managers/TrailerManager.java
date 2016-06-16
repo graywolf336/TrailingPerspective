@@ -7,8 +7,11 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.bukkit.GameMode;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
+import com.graywolf336.trailingperspective.classes.MobTrailer;
+import com.graywolf336.trailingperspective.classes.PlayerTrailer;
 import com.graywolf336.trailingperspective.interfaces.ITrailer;
 import com.graywolf336.trailingperspective.interfaces.ITrailerManager;
 
@@ -49,31 +52,39 @@ public class TrailerManager implements ITrailerManager {
         return this.trailers.stream().filter(t -> t.getUUID().equals(uuid)).findFirst().isPresent();
     }
 
-    public List<ITrailer> getTrailers() {
+    public List<ITrailer> getAllTrailers() {
         return this.trailers;
     }
 
-    public boolean isBeingTrailed(Player player) {
-        return this.isBeingTrailed(player.getUniqueId());
+    public List<PlayerTrailer> getPlayerTrailers() {
+        return this.trailers.stream().filter(t -> t instanceof PlayerTrailer).map(PlayerTrailer.class::cast).collect(Collectors.toList());
+    }
+
+    public List<MobTrailer> getMobTrailers() {
+        return this.trailers.stream().filter(t -> t instanceof PlayerTrailer).map(MobTrailer.class::cast).collect(Collectors.toList());
+    }
+
+    public boolean isBeingTrailed(Entity entity) {
+        return this.isBeingTrailed(entity.getUniqueId());
     }
 
     public boolean isBeingTrailed(UUID uuid) {
-        return this.trailers.stream().filter(t -> t.getUUIDOfPlayerCurrentlyTrailing().equals(uuid)).findAny().isPresent();
+        return this.trailers.stream().filter(t -> t.getUUIDOfEntityCurrentlyTrailing().equals(uuid)).findAny().isPresent();
     }
 
-    public List<ITrailer> getTrailersTrailingPlayer(Player player) {
-        return this.getTrailersTrailingPlayer(player.getUniqueId());
+    public List<ITrailer> getTrailersTrailingEntity(Entity entity) {
+        return this.getTrailersTrailingEntityByUUID(entity.getUniqueId());
     }
 
-    public List<ITrailer> getTrailersTrailingPlayer(UUID uuid) {
-        return this.trailers.stream().filter(t -> t.getUUIDOfPlayerCurrentlyTrailing().equals(uuid)).collect(Collectors.toList());
+    public List<ITrailer> getTrailersTrailingEntityByUUID(UUID uuid) {
+        return this.trailers.stream().filter(t -> t.getUUIDOfEntityCurrentlyTrailing().equals(uuid)).collect(Collectors.toList());
     }
 
     public List<ITrailer> removeAllTrailers() {
         List<ITrailer> preTrailers = new ArrayList<ITrailer>(this.trailers);
 
         for (ITrailer trailer : this.trailers) {
-            trailer.setNoLongerTrailingAnyone();
+            trailer.setNoLongerTrailingAnything();
 
             if (trailer.isOnline() && trailer.getPlayer().getGameMode() == GameMode.SPECTATOR) {
                 trailer.getPlayer().setSpectatorTarget(null);

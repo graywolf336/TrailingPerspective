@@ -23,7 +23,7 @@ public class TrailerNightVisionWorker implements ITrailerWorker {
     }
 
     public void run() {
-        for (ITrailer trailer : this.pl.getTrailerManager().getTrailers()) {
+        for (ITrailer trailer : this.pl.getTrailerManager().getAllTrailers()) {
             if (trailer.isOnline()) {
                 Player p = trailer.getPlayer();
                 Location l = p.getEyeLocation();

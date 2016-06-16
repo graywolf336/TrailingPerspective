@@ -3,7 +3,11 @@ package com.graywolf336.trailingperspective.interfaces;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+
+import com.graywolf336.trailingperspective.classes.MobTrailer;
+import com.graywolf336.trailingperspective.classes.PlayerTrailer;
 
 /**
  * Represents the manager of all the {@link ITrailer ITrailers}.
@@ -76,12 +80,12 @@ public interface ITrailerManager {
      * Checks whether the given player instance is being trailed by a {@link ITrailer trailer} or
      * not.
      *
-     * @param player the player to check
+     * @param entity the entity to check
      * @return whether the player is being trailed by a {@link ITrailer trailer} or not.
      * @deprecated Use {@link #isBeingTrailed(UUID)}
      */
     @Deprecated
-    public boolean isBeingTrailed(Player player);
+    public boolean isBeingTrailed(Entity entity);
 
     /**
      * Checks whether the given {@link UUID} is being trailed by a {@link ITrailer trailer} or not.
@@ -92,14 +96,14 @@ public interface ITrailerManager {
     public boolean isBeingTrailed(UUID uuid);
 
     /**
-     * Gets the {@link ITrailer trailers} who are currently trailing the given {@link Player}.
+     * Gets the {@link ITrailer trailers} who are currently trailing the given {@link Entity}.
      *
-     * @param player the player whose trailers we should get
-     * @return the {@link ITrailer trailers} trailing the given player
-     * @deprecated Use {@link #getTrailersTrailingPlayer(UUID)}
+     * @param entity the entity whose trailers we should get
+     * @return the {@link ITrailer trailers} trailing the given entity
+     * @deprecated Use {@link #getTrailersTrailingEntityByUUID(UUID)}
      */
     @Deprecated
-    public List<ITrailer> getTrailersTrailingPlayer(Player player);
+    public List<ITrailer> getTrailersTrailingEntity(Entity entity);
 
     /**
      * Gets the {@link ITrailer trailers} who are currently trailing the given {@link UUID}.
@@ -107,14 +111,28 @@ public interface ITrailerManager {
      * @param uuid the uuid of the player whose trailers we should get
      * @return the {@link ITrailer trailers} trailing the given player
      */
-    public List<ITrailer> getTrailersTrailingPlayer(UUID uuid);
+    public List<ITrailer> getTrailersTrailingEntityByUUID(UUID uuid);
 
     /**
-     * Gets the list of the current {@link ITrailer trailers}
+     * Gets the list of all the current {@link ITrailer trailers}
      *
-     * @return list of the current trailers
+     * @return list of all the current trailers
      */
-    public List<ITrailer> getTrailers();
+    public List<ITrailer> getAllTrailers();
+
+    /**
+     * Gets the list of the {@link PlayerTrailer player trailers}
+     *
+     * @return list of the current player trailers
+     */
+    public List<PlayerTrailer> getPlayerTrailers();
+
+    /**
+     * Gets the list of the {@link MobTrailer mob trailers}
+     *
+     * @return list of the current mob trailers
+     */
+    public List<MobTrailer> getMobTrailers();
 
     /**
      * Removes all of the current {@link ITrailer trailers} from being managed, only use after

@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import com.graywolf336.trailingperspective.interfaces.ITrailer;
 
-public class Trailer implements ITrailer {
+public class PlayerTrailer implements ITrailer {
     private List<String> previousTrailed;
     private String cachedUsername;
     private UUID uuid;
@@ -19,7 +20,7 @@ public class Trailer implements ITrailer {
     private boolean wasSentHome;
     private boolean isForcedHome;
 
-    public Trailer(Player player) {
+    public PlayerTrailer(Player player) {
         this.previousTrailed = new ArrayList<String>();
         this.uuid = player.getUniqueId();
         this.cachedUsername = player.getName();
@@ -54,7 +55,7 @@ public class Trailer implements ITrailer {
         return this.startTime == 0 ? this.startTime : System.currentTimeMillis() - this.startTime;
     }
 
-    public boolean isCurrentlyTrailingSomeone() {
+    public boolean isCurrentlyTrailingSomething() {
         return this.trailingPlayerUuid != null;
     }
 
@@ -62,22 +63,22 @@ public class Trailer implements ITrailer {
         return this.currentTrailingStartTime == 0 ? this.currentTrailingStartTime : System.currentTimeMillis() - this.currentTrailingStartTime;
     }
 
-    public void setPlayerCurrentlyTrailing(Player player) {
+    public void setEntityCurrentlyTrailing(Entity entity) {
         this.wasSentHome = false;
-        this.trailingPlayerUuid = player.getUniqueId();
+        this.trailingPlayerUuid = entity.getUniqueId();
         this.currentTrailingStartTime = System.currentTimeMillis();
-        this.previousTrailed.add(player.getName());
+        this.previousTrailed.add(entity.getName());
     }
 
-    public Player getPlayerCurrentlyTrailing() {
+    public Player getEntityCurrentlyTrailing() {
         return this.trailingPlayerUuid == null ? null : Bukkit.getPlayer(this.trailingPlayerUuid);
     }
 
-    public UUID getUUIDOfPlayerCurrentlyTrailing() {
+    public UUID getUUIDOfEntityCurrentlyTrailing() {
         return this.trailingPlayerUuid;
     }
 
-    public void setNoLongerTrailingAnyone() {
+    public void setNoLongerTrailingAnything() {
         this.trailingPlayerUuid = null;
         this.currentTrailingStartTime = 0L;
     }
@@ -86,7 +87,7 @@ public class Trailer implements ITrailer {
         this.currentTrailingStartTime = 0L;
     }
 
-    public List<String> getPlayersLastTrailed() {
+    public List<String> getEntitiesLastTrailed() {
         return this.previousTrailed;
     }
 

@@ -12,10 +12,10 @@ import com.graywolf336.trailingperspective.listeners.TrailingPerspectiveEssentia
 import com.graywolf336.trailingperspective.listeners.TrailingPerspectivePlayerListener;
 import com.graywolf336.trailingperspective.managers.TrailerManager;
 import com.graywolf336.trailingperspective.workers.HomeSendingWorker;
-import com.graywolf336.trailingperspective.workers.SpectatorSetWorker;
+import com.graywolf336.trailingperspective.workers.SpectatorSetGameModeWorker;
 import com.graywolf336.trailingperspective.workers.TrailerInformationWorker;
 import com.graywolf336.trailingperspective.workers.TrailerNightVisionWorker;
-import com.graywolf336.trailingperspective.workers.TrailersPerspectiveWorker;
+import com.graywolf336.trailingperspective.workers.PlayerTrailersPerspectiveWorker;
 
 public class TrailingPerspectiveMain extends JavaPlugin {
     private boolean debug = false;
@@ -86,15 +86,15 @@ public class TrailingPerspectiveMain extends JavaPlugin {
         SwitchPerspectiveCommand switchCmd = new SwitchPerspectiveCommand(this);
         this.getCommand("switchperspective").setExecutor(switchCmd);
         this.getCommand("switchperspective").setTabCompleter(switchCmd);
-        
+
         ForceHomeCommand forceHomeCmd = new ForceHomeCommand(this);
         this.getCommand("forcehome").setExecutor(forceHomeCmd);
         this.getCommand("forcehome").setTabCompleter(forceHomeCmd);
     }
 
     private void setupWorkers() {
-        this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new SpectatorSetWorker(this), 20, 5);
-        this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new TrailersPerspectiveWorker(this), 20, 10);
+        this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new SpectatorSetGameModeWorker(this), 20, 5);
+        this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new PlayerTrailersPerspectiveWorker(this), 20, 10);
         this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new TrailerInformationWorker(this), 20, 10);
         this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new HomeSendingWorker(this), 20, 20);
         this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new TrailerNightVisionWorker(this), 10, 15);
