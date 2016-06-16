@@ -15,6 +15,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 
 import com.graywolf336.trailingperspective.TrailingPerspectiveMain;
@@ -50,7 +51,12 @@ public class TrailingPerspectivePlayerListener implements Listener {
 
     @EventHandler
     public void playerTeleportedSomeWhere(PlayerTeleportEvent event) {
-        toggleTrailerTrailingPlayer(event.getPlayer());
+        TeleportCause cause = event.getCause();
+        
+        if(cause.equals(TeleportCause.END_PORTAL) || cause.equals(TeleportCause.NETHER_PORTAL))
+        {
+            toggleTrailerTrailingPlayer(event.getPlayer());
+        }
     }
 
     @EventHandler
