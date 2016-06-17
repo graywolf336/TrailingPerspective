@@ -28,7 +28,11 @@ public enum Settings {
     /** The setting which controls at what light level the perspective gets night vision. */
     LIGHT_LEVEL_FOR_NIGHT_VISION("perspective.night-vision.light-level"),
     /** The setting which controls how long the night vision potion lasts in seconds. */
-    NIGHT_VISION_POTION_LENGTH_SECONDS("perspective.night-vision.length-in-seconds");
+    NIGHT_VISION_POTION_LENGTH_SECONDS("perspective.night-vision.length-in-seconds"),
+    
+    //Hooks for plugins
+    /** Checks whether the configuration has essentials hook enabled. */
+    HOOKS_ESSENTIALS_ENABLED("hooks.essentials.enabled");
 
     private static Plugin pl;
     private String path;
