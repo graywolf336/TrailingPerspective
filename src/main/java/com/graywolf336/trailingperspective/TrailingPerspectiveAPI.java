@@ -1,5 +1,6 @@
 package com.graywolf336.trailingperspective;
 
+import com.graywolf336.trailingperspective.interfaces.IHookManager;
 import com.graywolf336.trailingperspective.interfaces.ITrailerManager;
 
 /**
@@ -23,5 +24,14 @@ public class TrailingPerspectiveAPI {
      */
     public static ITrailerManager getTrailerManager() {
         return plugin.getTrailerManager();
+    }
+
+    /**
+     * Gets the a valid {@link IHookManager} instance.
+     *
+     * @return {@link IHookManager} instance
+     */
+    public static IHookManager getHookManager() {
+        return plugin.getHookManager();
     }
 }

@@ -58,7 +58,7 @@ public class TrailerManager implements ITrailerManager {
     }
 
     public boolean isBeingTrailed(UUID uuid) {
-        return this.trailers.stream().filter(t -> t.getUUIDOfPlayerCurrentlyTrailing().equals(uuid)).findAny().isPresent();
+        return this.trailers.stream().filter(t -> t.isCurrentlyTrailingSomeone() && t.getUUIDOfPlayerCurrentlyTrailing().equals(uuid)).findAny().isPresent();
     }
 
     public List<ITrailer> getTrailersTrailingPlayer(Player player) {

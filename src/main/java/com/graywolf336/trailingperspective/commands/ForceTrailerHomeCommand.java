@@ -13,10 +13,10 @@ import com.graywolf336.trailingperspective.enums.Permissions;
 import com.graywolf336.trailingperspective.interfaces.ICommand;
 import com.graywolf336.trailingperspective.interfaces.ITrailer;
 
-public class ForceHomeCommand implements ICommand {
+public class ForceTrailerHomeCommand implements ICommand {
     private TrailingPerspectiveMain pl;
 
-    public ForceHomeCommand(TrailingPerspectiveMain plugin) {
+    public ForceTrailerHomeCommand(TrailingPerspectiveMain plugin) {
         this.pl = plugin;
     }
 
@@ -45,5 +45,4 @@ public class ForceHomeCommand implements ICommand {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         return Collections.emptyList();
     }
-
 }
