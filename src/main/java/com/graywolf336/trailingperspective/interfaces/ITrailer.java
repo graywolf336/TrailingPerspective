@@ -61,7 +61,7 @@ public interface ITrailer {
      *
      * @return the amount of time in milliseconds this person has been a trailer
      */
-    public Long getTotalTimeTrailing();
+    public long getTotalTimeTrailing();
 
     /**
      * Gets whether this trailer is currently trailing something or not.
@@ -76,7 +76,7 @@ public interface ITrailer {
      * @return the amount of time in milliseconds this person has been trailing this particular
      *         perspective.
      */
-    public Long getCurrentPerspectiveTrailingTime();
+    public long getCurrentPerspectiveTrailingTime();
 
     /**
      * Sets the {@link Entity} this trailer is currently trailing.

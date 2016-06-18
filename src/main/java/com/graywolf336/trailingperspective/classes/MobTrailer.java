@@ -1,72 +1,42 @@
 package com.graywolf336.trailingperspective.classes;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-import com.graywolf336.trailingperspective.interfaces.ITrailer;
+import com.graywolf336.trailingperspective.Util;
 
-public class MobTrailer implements ITrailer {
-    private UUID uuid;
-    private String cachedUsername;
+public class MobTrailer extends Trailer {
     private Entity entity;
+    private long currentTrailingStartTime;
 
     public MobTrailer(Player player) {
-        this.uuid = player.getUniqueId();
-        this.cachedUsername = player.getName();
+        super(player);
     }
 
-    public Player getPlayer() {
-        return Bukkit.getPlayer(uuid);
+    public MobTrailer(Player player, Entity entity) {
+        super(player);
+        this.entity = entity;
     }
 
-    public UUID getUUID() {
-        return this.uuid;
+    public long getTotalTimeTrailing() {
+        return this.getCurrentPerspectiveTrailingTime();
     }
 
-    public String getUsername() {
-        return this.cachedUsername;
-    }
-
-    public boolean isOnline() {
-        return Bukkit.getPlayer(uuid) != null;
-    }
-
-    @Override
-    public boolean wasSentHome() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public void setWhetherTheyHaveBeenSentHome(boolean sent) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public Long getTotalTimeTrailing() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public boolean isCurrentlyTrailingSomething() {
-        // TODO Auto-generated method stub
-        return false;
+        return this.entity != null;
     }
 
-    @Override
-    public Long getCurrentPerspectiveTrailingTime() {
-        // TODO Auto-generated method stub
-        return null;
+    public long getCurrentPerspectiveTrailingTime() {
+        return this.currentTrailingStartTime == 0 ? this.currentTrailingStartTime : System.currentTimeMillis() - this.currentTrailingStartTime;
     }
 
     public void setEntityCurrentlyTrailing(Entity entity) {
+        this.setWhetherTheyHaveBeenSentHome(false);
+        this.currentTrailingStartTime = System.currentTimeMillis();
         this.entity = entity;
     }
 
@@ -75,41 +45,19 @@ public class MobTrailer implements ITrailer {
     }
 
     public UUID getUUIDOfEntityCurrentlyTrailing() {
-        return this.entity.getUniqueId();
+        return this.entity == null ? null : this.entity.getUniqueId();
     }
 
-    @Override
     public void setNoLongerTrailingAnything() {
-        // TODO Auto-generated method stub
-
+        this.entity = null;
+        this.currentTrailingStartTime = 0L;
     }
 
-    @Override
     public void flagReadyToGoNext() {
-        // TODO Auto-generated method stub
-
+        ;// This type of Trailer doesn't respect this flag
     }
 
     public List<String> getEntitiesLastTrailed() {
-        return Collections.emptyList();
+        return Arrays.asList(new String[] { entity == null ? "" : Util.getEntityTypeNiceString(entity.getType()) });
     }
-
-    @Override
-    public boolean isForcedHome() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public void forcePlayerHome() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void unForcePlayerHome() {
-        // TODO Auto-generated method stub
-
-    }
-
 }
