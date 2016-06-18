@@ -69,7 +69,7 @@ public class TrailerManager implements ITrailerManager {
     }
 
     public boolean isBeingTrailed(UUID uuid) {
-        return this.trailers.stream().filter(t -> t.getUUIDOfEntityCurrentlyTrailing().equals(uuid)).findAny().isPresent();
+        return this.trailers.stream().filter(t -> t.isCurrentlyTrailingSomething() && t.getUUIDOfEntityCurrentlyTrailing().equals(uuid)).findAny().isPresent();
     }
 
     public List<ITrailer> getTrailersTrailingEntity(Entity entity) {
