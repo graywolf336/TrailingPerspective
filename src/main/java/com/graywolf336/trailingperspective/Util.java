@@ -132,13 +132,13 @@ public class Util {
     }
 
     /**
-     * Gets a random {@link Player} whose name is not a trailer or in the given list of usernames.
+     * Gets a random {@link Player} who is valid for being trailed.
      *
      * @param trailers the list of {@link ITrailer trailers}
      * @param names the names to ignore.
      * @return a random {@link Player} <strong>OR</strong> null
      */
-    public static Player getRandomAlivePlayerNotInList(List<ITrailer> trailers, String... names) {
+    public static Player getRandomPlayerValidForTrailing(List<ITrailer> trailers, String... names) {
         List<String> namesToCheck = new ArrayList<String>();
         namesToCheck.addAll(trailers.stream().map(t -> t.getUsername()).collect(Collectors.toList()));
 

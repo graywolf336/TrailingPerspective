@@ -8,7 +8,9 @@ import org.bukkit.entity.Player;
 
 import com.graywolf336.trailingperspective.TrailingPerspectiveMain;
 import com.graywolf336.trailingperspective.Util;
+import com.graywolf336.trailingperspective.classes.PlayerTrailer;
 import com.graywolf336.trailingperspective.enums.Settings;
+import com.graywolf336.trailingperspective.events.PlayerTrailerPerspectiveChangeEvent;
 import com.graywolf336.trailingperspective.interfaces.ITrailer;
 import com.graywolf336.trailingperspective.interfaces.ITrailerWorker;
 
@@ -34,14 +36,14 @@ public class PlayerTrailersPerspectiveWorker implements ITrailerWorker {
 
                 // Check if they have trailed someone yet or not
                 if (trailer.getEntitiesLastTrailed().isEmpty()) {
-                    p = Util.getRandomAlivePlayerNotInList(trailers);
+                    p = Util.getRandomPlayerValidForTrailing(trailers);
                 } else {
                     String lastUser = trailer.getEntitiesLastTrailed().get(trailer.getEntitiesLastTrailed().size() - 1);
-                    p = Util.getRandomAlivePlayerNotInList(trailers, lastUser);
+                    p = Util.getRandomPlayerValidForTrailing(trailers, lastUser);
 
                     // if we couldn't get anyone, then just get someone who isn't this trailer
                     if (p == null) {
-                        p = Util.getRandomAlivePlayerNotInList(trailers);
+                        p = Util.getRandomPlayerValidForTrailing(trailers);
                     }
 
                     // If the player isn't null and it's the same player as who was before,
@@ -60,6 +62,7 @@ public class PlayerTrailersPerspectiveWorker implements ITrailerWorker {
                     final Player target = p;
                     this.pl.getServer().getScheduler().runTaskLater(this.pl, () -> trailer.getPlayer().teleport(target), 1L);
                     this.pl.getServer().getScheduler().runTaskLater(this.pl, () -> trailer.getPlayer().setSpectatorTarget(target), 3L);
+                    this.pl.getServer().getScheduler().runTaskLater(this.pl, () -> this.pl.getServer().getPluginManager().callEvent(new PlayerTrailerPerspectiveChangeEvent((PlayerTrailer) trailer, target)), 4L);
 
                     this.pl.getLogger().info(trailer.getUsername() + " is now trailing the perspective of " + p.getName());
                     trailer.getPlayer().sendTitle("", ChatColor.GREEN + "Now Trailing: " + p.getDisplayName());

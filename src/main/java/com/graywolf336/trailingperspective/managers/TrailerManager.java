@@ -6,12 +6,15 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import com.graywolf336.trailingperspective.classes.MobTrailer;
 import com.graywolf336.trailingperspective.classes.PlayerTrailer;
+import com.graywolf336.trailingperspective.events.NewMobTrailerEvent;
+import com.graywolf336.trailingperspective.events.NewPlayerTrailerEvent;
 import com.graywolf336.trailingperspective.interfaces.ITrailer;
 import com.graywolf336.trailingperspective.interfaces.ITrailerManager;
 
@@ -24,6 +27,12 @@ public class TrailerManager implements ITrailerManager {
 
     public void addTrailer(ITrailer trailer) {
         this.trailers.add(trailer);
+
+        if (trailer instanceof PlayerTrailer) {
+            Bukkit.getPluginManager().callEvent(new NewPlayerTrailerEvent(trailer.getPlayer(), (PlayerTrailer) trailer));
+        } else if (trailer instanceof MobTrailer) {
+            Bukkit.getPluginManager().callEvent(new NewMobTrailerEvent(trailer.getPlayer(), (MobTrailer) trailer));
+        }
     }
 
     public boolean removeTrailer(ITrailer trailer) {

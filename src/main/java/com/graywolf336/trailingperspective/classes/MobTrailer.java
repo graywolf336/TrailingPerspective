@@ -54,7 +54,7 @@ public class MobTrailer extends Trailer {
     }
 
     public void flagReadyToGoNext() {
-        ;// This type of Trailer doesn't respect this flag
+        // This type of Trailer doesn't respect this flag
     }
 
     public List<String> getEntitiesLastTrailed() {
