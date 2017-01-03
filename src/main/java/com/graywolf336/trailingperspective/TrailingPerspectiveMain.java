@@ -78,9 +78,9 @@ public class TrailingPerspectiveMain extends JavaPlugin {
         if (this.debug) {
             for (String s : msgs) {
                 if (colored) {
-                    getServer().getConsoleSender().sendMessage("[TrailingPerspective] [Debug]: " + s);
+                    this.getServer().getConsoleSender().sendMessage("[TrailingPerspective] [Debug]: " + s);
                 } else {
-                    getLogger().info("[Debug]: " + s);
+                    this.getLogger().info("[Debug]: " + s);
                 }
             }
         }
