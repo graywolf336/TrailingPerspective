@@ -21,8 +21,8 @@ public class PlayerTrailerPerspectiveChangeEvent extends Event {
     /**
      * Creates a new {@link PlayerTrailerPerspectiveChangeEvent player trailer perspective change event} for the given trailer and perspective.
      * 
-     * @param trailer
-     * @param trailed
+     * @param trailer the {@link PlayerTrailer} instance
+     * @param perspective the {@link Player} who is the perspective for the trailer
      */
     public PlayerTrailerPerspectiveChangeEvent(PlayerTrailer trailer, Player perspective) {
         this.trailer = trailer;
@@ -41,7 +41,7 @@ public class PlayerTrailerPerspectiveChangeEvent extends Event {
     /**
      * Gets the {@link PlayerTrailer} for this trailer.
      * 
-     * @return
+     * @return the {@link PlayerTrailer}
      */
     public PlayerTrailer getTrailer() {
         return this.trailer;
