@@ -78,9 +78,9 @@ public class TrailingPerspectiveMain extends JavaPlugin {
         if (this.debug) {
             for (String s : msgs) {
                 if (colored) {
-                    getServer().getConsoleSender().sendMessage("[TrailingPerspective] [Debug]: " + s);
+                    this.getServer().getConsoleSender().sendMessage("[TrailingPerspective] [Debug]: " + s);
                 } else {
-                    getLogger().info("[Debug]: " + s);
+                    this.getLogger().info("[Debug]: " + s);
                 }
             }
         }
@@ -98,7 +98,7 @@ public class TrailingPerspectiveMain extends JavaPlugin {
         SwitchPerspectiveCommand switchCmd = new SwitchPerspectiveCommand(this);
         this.getCommand("switchperspective").setExecutor(switchCmd);
         this.getCommand("switchperspective").setTabCompleter(switchCmd);
-      
+
         ForceTrailerHomeCommand forceHomeCmd = new ForceTrailerHomeCommand(this);
         this.getCommand("forcetrailerhome").setExecutor(forceHomeCmd);
         this.getCommand("forcetrailerhome").setTabCompleter(forceHomeCmd);

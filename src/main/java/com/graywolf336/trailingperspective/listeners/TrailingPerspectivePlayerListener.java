@@ -46,7 +46,7 @@ public class TrailingPerspectivePlayerListener implements Listener {
 
     @EventHandler
     public void playerDoneDied(PlayerDeathEvent event) {
-        toggleTrailerTrailingPlayer(event.getEntity());
+        this.toggleTrailerTrailingPlayer(event.getEntity());
     }
 
     @EventHandler
@@ -54,7 +54,7 @@ public class TrailingPerspectivePlayerListener implements Listener {
         TeleportCause cause = event.getCause();
 
         if (cause == TeleportCause.END_PORTAL || cause == TeleportCause.NETHER_PORTAL) {
-            toggleTrailerTrailingPlayer(event.getPlayer());
+            this.toggleTrailerTrailingPlayer(event.getPlayer());
         }
     }
 
@@ -65,13 +65,13 @@ public class TrailingPerspectivePlayerListener implements Listener {
         if (passenger instanceof Player) {
             Player player = (Player) passenger;
 
-            toggleTrailerTrailingPlayer(player);
+            this.toggleTrailerTrailingPlayer(player);
         }
     }
 
     @EventHandler
     public void playerTookANap(PlayerBedEnterEvent event) {
-        toggleTrailerTrailingPlayer(event.getPlayer());
+        this.toggleTrailerTrailingPlayer(event.getPlayer());
     }
 
     @EventHandler
@@ -84,12 +84,12 @@ public class TrailingPerspectivePlayerListener implements Listener {
 
     @EventHandler
     public void playerHasDecidedToLeaveUs(PlayerQuitEvent event) {
-        playerLeft(event.getPlayer());
+        this.playerLeft(event.getPlayer());
     }
 
     @EventHandler
     public void playerWasForcefullyRemovedFromUs(PlayerKickEvent event) {
-        playerLeft(event.getPlayer());
+        this.playerLeft(event.getPlayer());
     }
 
     private void playerLeft(Player player) {
@@ -103,13 +103,13 @@ public class TrailingPerspectivePlayerListener implements Listener {
         } else if (this.pl.getTrailerManager().isBeingTrailed(player.getUniqueId())) {
             this.pl.debug(false, "A person who is being trailed has left us.");
 
-            toggleTrailerTrailingPlayer(player);
+            this.toggleTrailerTrailingPlayer(player);
         }
     }
 
     private void toggleTrailerTrailingPlayer(Player player) {
         if (this.pl.getTrailerManager().isBeingTrailed(player.getUniqueId())) {
-            pl.getTrailerManager().getTrailersTrailingPlayer(player.getUniqueId()).forEach(t -> t.setNoLongerTrailingAnyone());
+            this.pl.getTrailerManager().getTrailersTrailingPlayer(player.getUniqueId()).forEach(t -> t.setNoLongerTrailingAnyone());
         }
     }
 }
