@@ -27,7 +27,7 @@ public class SwitchPerspectiveCommand implements ICommand {
             switch (args.length) {
                 case 0:
                     Player p = (Player) sender;
-                    if (!Permissions.SWITCH_PERSPECTIVE.has(p)) {
+                    if (!Permissions.SWITCH_PERSPECTIVE.check(p)) {
                         this.noPermissionsMessage(p);
                         break;
                     }
@@ -59,7 +59,7 @@ public class SwitchPerspectiveCommand implements ICommand {
     }
 
     private void handleSwitchingOthers(CommandSender sender, String name) {
-        if (!Permissions.SWITCH_PERSPECTIVE_OTHERS.has(sender)) {
+        if (!Permissions.SWITCH_PERSPECTIVE_OTHERS.check(sender)) {
             this.noPermissionsMessage(sender);
             return;
         }
@@ -86,7 +86,7 @@ public class SwitchPerspectiveCommand implements ICommand {
     }
 
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        if (Permissions.SWITCH_PERSPECTIVE_OTHERS.has(sender)) {
+        if (Permissions.SWITCH_PERSPECTIVE_OTHERS.check(sender)) {
             List<String> results = new ArrayList<String>();
             for (ITrailer t : this.pl.getTrailerManager().getPlayerTrailers()) {
                 if (StringUtil.startsWithIgnoreCase(t.getUsername(), args[0].toLowerCase())) {

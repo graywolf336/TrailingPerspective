@@ -24,7 +24,7 @@ public class ForceTrailerHomeCommand implements ICommand {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
 
-        if (Permissions.SET_FORCE_HOME.has(sender) && sender instanceof Player) {
+        if (Permissions.SET_FORCE_HOME.check(sender) && sender instanceof Player) {
             ITrailer trailer = pl.getTrailerManager().getTrailer(player.getUniqueId());
 
             if (trailer.isForcedHome()) {

@@ -50,7 +50,7 @@ public enum Permissions {
      * @param sender the person to check
      * @return whether the player has permission or not
      */
-    public boolean has(CommandSender sender) {
+    public boolean check(CommandSender sender) {
         return sender.hasPermission(this.node);
     }
 }

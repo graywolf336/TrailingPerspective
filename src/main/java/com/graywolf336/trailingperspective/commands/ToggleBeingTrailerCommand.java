@@ -22,7 +22,7 @@ public class ToggleBeingTrailerCommand implements ICommand {
     }
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (Permissions.TOGGLE_BEING_TRAILER.has(sender) && sender instanceof Player) {
+        if (Permissions.TOGGLE_BEING_TRAILER.check(sender) && sender instanceof Player) {
             Player player = (Player) sender;
 
             if (pl.getTrailerManager().isTrailer(player.getUniqueId())) {
