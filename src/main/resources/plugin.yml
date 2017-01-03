@@ -11,6 +11,8 @@ commands:
     description: Sets the home for all of the trailers.
   switchperspective:
     description: Flags the trailer to have their perspective switched.
+  forcetrailerhome:
+    description: Forces a trailer to go home and stay there.
 permissions:
   trailingperspective.togglebeingtrailer:
     default: op

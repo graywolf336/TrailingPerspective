@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import com.earth2me.essentials.Essentials;
 import com.graywolf336.trailingperspective.interfaces.ITrailer;
 
 public class Util {
@@ -118,7 +117,6 @@ public class Util {
      * @return a random {@link Player} <strong>OR</strong> null
      */
     public static Player getRandomAlivePlayerNotInList(List<ITrailer> trailers, String... names) {
-        Essentials ess = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
         List<String> namesToCheck = new ArrayList<String>();
         namesToCheck.addAll(trailers.stream().map(t -> t.getUsername()).collect(Collectors.toList()));
 
@@ -126,7 +124,9 @@ public class Util {
             namesToCheck.add(s);
         }
 
-        List<Player> players = Bukkit.getOnlinePlayers().stream().filter(p -> !namesToCheck.contains(p.getName()) && !p.isDead() && !ess.getUser(p.getName()).isAfk()).collect(Collectors.toList());
+        List<Player> players = Bukkit.getOnlinePlayers().stream().filter(p -> {
+            return !namesToCheck.contains(p.getName()) && TrailingPerspectiveAPI.getHookManager().checkHooksToSeeIfPlayerIsOkayToBeTrailed(p);
+        }).collect(Collectors.toList());
 
         switch (players.size()) {
             case 0:

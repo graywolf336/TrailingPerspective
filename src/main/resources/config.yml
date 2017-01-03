@@ -8,3 +8,6 @@ perspective:
   night-vision:
     light-level: 10
     length-in-seconds: 30
+hooks:
+  essentials:
+    enabled: true
