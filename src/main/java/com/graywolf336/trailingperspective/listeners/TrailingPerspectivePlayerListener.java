@@ -53,7 +53,7 @@ public class TrailingPerspectivePlayerListener implements Listener {
     public void playerTeleportedSomeWhere(PlayerTeleportEvent event) {
         TeleportCause cause = event.getCause();
 
-        if (cause.equals(TeleportCause.END_PORTAL) || cause.equals(TeleportCause.NETHER_PORTAL)) {
+        if (cause == TeleportCause.END_PORTAL || cause == TeleportCause.NETHER_PORTAL) {
             toggleTrailerTrailingPlayer(event.getPlayer());
         }
     }
