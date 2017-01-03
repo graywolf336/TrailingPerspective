@@ -36,15 +36,9 @@ public class HookManager implements IHookManager {
     }
 
     public boolean checkHooksToSeeIfPlayerIsOkayToBeTrailed(Player player) {
-        boolean toReturn = true;
-
-        for (Hook h : this.hooks) {
-            if (!h.isPlayerOkayToBeTrailed(player)) {
-                toReturn = false;
-            }
-        }
-
-        return toReturn;
+        //Check each hook, if any of them say this player can't be trailed, then return false if they can't
+        //So, if the filter returns no values then all hooks gave the okay to be trailed
+        return !this.hooks.stream().filter(h -> !h.isPlayerOkayToBeTrailed(player)).findAny().isPresent();
     }
 
     private void loadHooks() {
