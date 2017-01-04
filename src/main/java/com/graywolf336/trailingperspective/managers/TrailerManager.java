@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
+import com.graywolf336.trailingperspective.TrailingPerspectiveAPI;
 import com.graywolf336.trailingperspective.classes.MobTrailer;
 import com.graywolf336.trailingperspective.classes.PlayerTrailer;
 import com.graywolf336.trailingperspective.events.NewMobTrailerEvent;
@@ -29,8 +31,10 @@ public class TrailerManager implements ITrailerManager {
         this.trailers.add(trailer);
 
         if (trailer instanceof PlayerTrailer) {
+            TrailingPerspectiveAPI.debug(false, trailer.getPlayer().getName() + " is now a PlayerTrailer.");
             Bukkit.getPluginManager().callEvent(new NewPlayerTrailerEvent(trailer.getPlayer(), (PlayerTrailer) trailer));
         } else if (trailer instanceof MobTrailer) {
+            TrailingPerspectiveAPI.debug(false, trailer.getPlayer().getName() + " is now a MobTrailer.");
             Bukkit.getPluginManager().callEvent(new NewMobTrailerEvent(trailer.getPlayer(), (MobTrailer) trailer));
         }
     }
@@ -84,9 +88,17 @@ public class TrailerManager implements ITrailerManager {
     public List<PlayerTrailer> getPlayerTrailers() {
         return this.trailers.stream().filter(t -> t instanceof PlayerTrailer).map(PlayerTrailer.class::cast).collect(Collectors.toList());
     }
+    
+    public Stream<PlayerTrailer> getPlayerTrailersStream() {
+        return this.trailers.stream().filter(t -> t instanceof PlayerTrailer).map(PlayerTrailer.class::cast);
+    }
 
     public List<MobTrailer> getMobTrailers() {
-        return this.trailers.stream().filter(t -> t instanceof PlayerTrailer).map(MobTrailer.class::cast).collect(Collectors.toList());
+        return this.trailers.stream().filter(t -> t instanceof MobTrailer).map(MobTrailer.class::cast).collect(Collectors.toList());
+    }
+    
+    public Stream<MobTrailer> getMobTrailersStream() {
+        return this.trailers.stream().filter(t -> t instanceof MobTrailer).map(MobTrailer.class::cast);
     }
 
     public boolean isBeingTrailed(Entity entity) {

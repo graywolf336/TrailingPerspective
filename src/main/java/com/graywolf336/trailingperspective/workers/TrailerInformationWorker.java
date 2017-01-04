@@ -48,9 +48,13 @@ public class TrailerInformationWorker implements ITrailerWorker {
                 msg.append(ChatColor.GREEN);
                 msg.append(ChatColor.ITALIC);
 
-                long timeLeft = this.changeInterval - trailer.getCurrentPerspectiveTrailingTime();
-
-                msg.append(Util.getDurationBreakdown(timeLeft));
+                if (trailer.isCurrentlyTrailingSomething() && trailer instanceof PlayerTrailer) {
+                    long timeLeft = this.changeInterval - trailer.getCurrentPerspectiveTrailingTime();
+                    msg.append(Util.getDurationBreakdown(timeLeft));
+                } else {
+                    msg.append("N/A");
+                }
+                
                 msg.append(ChatColor.DARK_GRAY);
                 msg.append(" \u2248\u2248 ");
 

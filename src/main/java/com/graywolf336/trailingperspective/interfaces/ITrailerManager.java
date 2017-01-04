@@ -2,6 +2,7 @@ package com.graywolf336.trailingperspective.interfaces;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -170,6 +171,13 @@ public interface ITrailerManager {
      * @return list of the current player trailers
      */
     public List<PlayerTrailer> getPlayerTrailers();
+    
+    /**
+     * Gets a {@link Stream} of the {@link PlayerTrailer}s
+     * 
+     * @return stream of current player trailers
+     */
+    public Stream<PlayerTrailer> getPlayerTrailersStream();
 
     /**
      * Gets the list of the {@link MobTrailer mob trailers}
@@ -177,6 +185,13 @@ public interface ITrailerManager {
      * @return list of the current mob trailers
      */
     public List<MobTrailer> getMobTrailers();
+    
+    /**
+     * Gets a {@link Stream} of the {@link MobTrailer}s
+     * 
+     * @return stream of current mob trailers
+     */
+    public Stream<MobTrailer> getMobTrailersStream();
 
     /**
      * Removes all of the current {@link ITrailer trailers} from being managed,

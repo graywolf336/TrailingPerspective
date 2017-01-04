@@ -39,7 +39,7 @@ public class ToggleBeingMobTrailerCommand implements ICommand {
                     player.sendMessage(ChatColor.GRAY + "*cough* " + ChatColor.RED + "You aren't looking at a LivingEntity (aka a mob)!");
                 } else {
                     pl.getTrailerManager().addTrailer(new MobTrailer(player, target));
-                    player.sendMessage(ChatColor.GREEN + "You're now a trailer of other's perspectives.");
+                    player.sendMessage(ChatColor.GREEN + "You're now a trailer of a mob's perspective.");
                 }
             }
         } else {
