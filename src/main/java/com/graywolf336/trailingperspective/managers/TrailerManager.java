@@ -61,6 +61,22 @@ public class TrailerManager implements ITrailerManager {
         return this.trailers.stream().filter(t -> t.getUUID().equals(uuid)).findFirst().isPresent();
     }
 
+    public boolean isPlayerTrailer(Player player) {
+        return this.isPlayerTrailer(player.getUniqueId());
+    }
+
+    public boolean isPlayerTrailer(UUID uuid) {
+        return this.trailers.stream().filter(t -> t instanceof PlayerTrailer).filter(t -> t.getUUID().equals(uuid)).findFirst().isPresent();
+    }
+
+    public boolean isMobTrailer(Player player) {
+        return this.isMobTrailer(player.getUniqueId());
+    }
+
+    public boolean isMobTrailer(UUID uuid) {
+        return this.trailers.stream().filter(t -> t instanceof MobTrailer).filter(t -> t.getUUID().equals(uuid)).findFirst().isPresent();
+    }
+
     public List<ITrailer> getAllTrailers() {
         return this.trailers;
     }

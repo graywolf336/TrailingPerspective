@@ -25,7 +25,7 @@ public class ToggleBeingTrailerCommand implements ICommand {
         if (Permissions.TOGGLE_BEING_TRAILER.check(sender) && sender instanceof Player) {
             Player player = (Player) sender;
 
-            if (pl.getTrailerManager().isTrailer(player.getUniqueId())) {
+            if (pl.getTrailerManager().isPlayerTrailer(player.getUniqueId())) {
                 pl.getTrailerManager().removeTrailer(player.getUniqueId());
                 player.setGameMode(GameMode.SURVIVAL);
                 player.sendMessage(ChatColor.RED + "You're no longer a trailer of other's perspectives.");

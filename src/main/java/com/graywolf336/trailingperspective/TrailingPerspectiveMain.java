@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.graywolf336.trailingperspective.commands.ForceTrailerHomeCommand;
 import com.graywolf336.trailingperspective.commands.SetTrailerHomeCommand;
 import com.graywolf336.trailingperspective.commands.SwitchPerspectiveCommand;
+import com.graywolf336.trailingperspective.commands.ToggleBeingMobTrailerCommand;
 import com.graywolf336.trailingperspective.commands.ToggleBeingTrailerCommand;
 import com.graywolf336.trailingperspective.enums.Settings;
 import com.graywolf336.trailingperspective.interfaces.IHookManager;
@@ -90,6 +91,10 @@ public class TrailingPerspectiveMain extends JavaPlugin {
         ToggleBeingTrailerCommand toggleCmd = new ToggleBeingTrailerCommand(this);
         this.getCommand("togglebeingtrailer").setExecutor(toggleCmd);
         this.getCommand("togglebeingtrailer").setTabCompleter(toggleCmd);
+
+        ToggleBeingMobTrailerCommand toggleMobCmd = new ToggleBeingMobTrailerCommand(this);
+        this.getCommand("togglebeingmobtrailer").setExecutor(toggleMobCmd);
+        this.getCommand("togglebeingmobtrailer").setTabCompleter(toggleMobCmd);
 
         SetTrailerHomeCommand homeCmd = new SetTrailerHomeCommand();
         this.getCommand("settrailerhome").setExecutor(homeCmd);

@@ -13,10 +13,6 @@ public class MobTrailer extends Trailer {
     private Entity entity;
     private long currentTrailingStartTime;
 
-    public MobTrailer(Player player) {
-        super(player);
-    }
-
     public MobTrailer(Player player, Entity entity) {
         super(player);
         this.entity = entity;
