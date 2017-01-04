@@ -3,6 +3,7 @@ package com.graywolf336.trailingperspective.interfaces;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 /**
@@ -60,14 +61,14 @@ public interface ITrailer {
      *
      * @return the amount of time in milliseconds this person has been a trailer
      */
-    public Long getTotalTimeTrailing();
+    public long getTotalTimeTrailing();
 
     /**
-     * Gets whether this trailer is currently trailing someone or not.
+     * Gets whether this trailer is currently trailing something or not.
      *
-     * @return whether this trailing is busy trailing someone or not
+     * @return whether this trailing is busy trailing something or not
      */
-    public boolean isCurrentlyTrailingSomeone();
+    public boolean isCurrentlyTrailingSomething();
 
     /**
      * Gets the amount of time this trailer has been trailing the current perspective.
@@ -75,31 +76,31 @@ public interface ITrailer {
      * @return the amount of time in milliseconds this person has been trailing this particular
      *         perspective.
      */
-    public Long getCurrentPerspectiveTrailingTime();
+    public long getCurrentPerspectiveTrailingTime();
 
     /**
-     * Sets the {@link Player} this trailer is currently trailing.
+     * Sets the {@link Entity} this trailer is currently trailing.
      *
-     * @param player the player who they're trailing.
+     * @param entity the entity who they're trailing.
      */
-    public void setPlayerCurrentlyTrailing(Player player);
+    public void setEntityCurrentlyTrailing(Entity entity);
 
     /**
-     * Gets the {@link Player} this trailer is currently viewing the perspective of.
+     * Gets the {@link Entity} this trailer is currently viewing the perspective of.
      *
-     * @return the current trailer's perspective's {@link Player}
+     * @return the current trailer's perspective's {@link Entity}
      */
-    public Player getPlayerCurrentlyTrailing();
+    public Entity getEntityCurrentlyTrailing();
 
     /**
-     * Gets the {@link UUID} of the player who this trailer is currently viewing the perspective of.
+     * Gets the {@link UUID} of the entity who this trailer is currently viewing the perspective of.
      *
      * @return the {@link UUID} of the current trailer's perspective
      */
-    public UUID getUUIDOfPlayerCurrentlyTrailing();
+    public UUID getUUIDOfEntityCurrentlyTrailing();
 
-    /** Sets that this trailer is no longer trailing anyone. */
-    public void setNoLongerTrailingAnyone();
+    /** Sets that this trailer is no longer trailing anything. */
+    public void setNoLongerTrailingAnything();
 
     /** Flags that this trailer is ready to switch perspectives. */
     public void flagReadyToGoNext();
@@ -109,7 +110,7 @@ public interface ITrailer {
      *
      * @return a string list of the usernames who this trailer trailed
      */
-    public List<String> getPlayersLastTrailed();
+    public List<String> getEntitiesLastTrailed();
 
     /**
      * Gets whether the trailer is forced to the home position or not.
@@ -118,13 +119,9 @@ public interface ITrailer {
      */
     public boolean isForcedHome();
 
-    /**
-     * Set isForcedHome true
-     */
+    /** Set isForcedHome true */
     public void forcePlayerHome();
 
-    /**
-     * Set isForcedHome false
-     */
+    /** Set isForcedHome false */
     public void unForcePlayerHome();
 }

@@ -14,7 +14,7 @@ import com.graywolf336.trailingperspective.interfaces.ICommand;
 
 public class SetTrailerHomeCommand implements ICommand {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (Permissions.SET_TRAILER_HOME.has(sender) && sender instanceof Player) {
+        if (Permissions.SET_TRAILER_HOME.check(sender) && sender instanceof Player) {
             Player player = (Player) sender;
             Settings.HOME_LOCATION.setAndSave(player.getLocation());
             player.sendMessage(ChatColor.GREEN + "Trailer home location successfully set!");

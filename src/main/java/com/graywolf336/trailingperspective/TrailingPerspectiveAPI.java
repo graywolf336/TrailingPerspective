@@ -34,4 +34,14 @@ public class TrailingPerspectiveAPI {
     public static IHookManager getHookManager() {
         return plugin.getHookManager();
     }
+    
+    /**
+     * Prints messages if the plugin is in a debugging state.
+     *
+     * @param colored whether the messages are colored.
+     * @param msgs the messages to print.
+     */
+    public static void debug(boolean colored, String... msgs) {
+        plugin.debug(colored, msgs);
+    }
 }

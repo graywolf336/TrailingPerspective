@@ -12,6 +12,8 @@ import org.bukkit.command.CommandSender;
 public enum Permissions {
     /** The permission for the toggle being a trailer command, defaults to op. */
     TOGGLE_BEING_TRAILER("trailingperspective.togglebeingtrailer"),
+    /** The permission for toggling being a mob trailer command, defaults to op. */
+    TOGGLE_BEING_MOB_TRAILER("trailingperspective.togglebeingmobtrailer"),
     /** The permission for being able to set the trailer's home location, defaults to op. */
     SET_TRAILER_HOME("trailingperspective.settrailerhome"),
     /**
@@ -50,7 +52,7 @@ public enum Permissions {
      * @param sender the person to check
      * @return whether the player has permission or not
      */
-    public boolean has(CommandSender sender) {
+    public boolean check(CommandSender sender) {
         return sender.hasPermission(this.node);
     }
 }

@@ -20,6 +20,7 @@ public abstract class Hook {
     /**
      * Checks if the {@link Player} is okay to be trailed.
      *
+     * @param player the player to be checked
      * @return whether the player is ready to be trailed
      */
     public boolean isPlayerOkayToBeTrailed(Player player) {

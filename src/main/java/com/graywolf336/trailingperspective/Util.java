@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import com.graywolf336.trailingperspective.interfaces.ITrailer;
@@ -110,13 +111,34 @@ public class Util {
     }
 
     /**
-     * Gets a random {@link Player} whose name is not a trailer or in the given list of usernames.
+     * Turns "WITHER_SKELETON" into "Wither Skeleton".
+     *
+     * @param entityType the entity type to turn into a nice string
+     * @return the nice format of the entityType
+     */
+    public static String getEntityTypeNiceString(EntityType entityType) {
+        StringBuilder sb = new StringBuilder();
+
+        for (String s : entityType.toString().toLowerCase().split("_")) {
+            sb.append(Character.toUpperCase(s.charAt(0)));
+            sb.append(s.substring(1));
+            sb.append(" ");
+        }
+
+        // Delete the last space
+        sb.deleteCharAt(sb.length() - 1);
+
+        return sb.toString();
+    }
+
+    /**
+     * Gets a random {@link Player} who is valid for being trailed.
      *
      * @param trailers the list of {@link ITrailer trailers}
      * @param names the names to ignore.
      * @return a random {@link Player} <strong>OR</strong> null
      */
-    public static Player getRandomAlivePlayerNotInList(List<ITrailer> trailers, String... names) {
+    public static Player getRandomPlayerValidForTrailing(List<ITrailer> trailers, String... names) {
         List<String> namesToCheck = new ArrayList<String>();
         namesToCheck.addAll(trailers.stream().map(t -> t.getUsername()).collect(Collectors.toList()));
 

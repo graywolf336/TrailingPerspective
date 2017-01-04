@@ -19,7 +19,7 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 
 import com.graywolf336.trailingperspective.TrailingPerspectiveMain;
-import com.graywolf336.trailingperspective.classes.Trailer;
+import com.graywolf336.trailingperspective.classes.PlayerTrailer;
 import com.graywolf336.trailingperspective.enums.Settings;
 import com.graywolf336.trailingperspective.interfaces.ITrailer;
 
@@ -35,7 +35,7 @@ public class TrailingPerspectivePlayerListener implements Listener {
         if (Settings.CLEAR_TRAILERS_CHAT.asBoolean()) {
             Set<Player> rec = new HashSet<Player>(event.getRecipients());
 
-            for (ITrailer trailer : this.pl.getTrailerManager().getTrailers()) {
+            for (ITrailer trailer : this.pl.getTrailerManager().getAllTrailers()) {
                 rec.remove(trailer.getPlayer());
             }
 
@@ -78,7 +78,7 @@ public class TrailingPerspectivePlayerListener implements Listener {
     public void playerHasDecidedToJoinUs(PlayerJoinEvent event) {
         if (Settings.USERNAME.asString().equalsIgnoreCase(event.getPlayer().getName()) && Settings.AUTOMATICALLY_ENABLED.asBoolean()) {
             this.pl.debug(false, "The selected player has joined the server and automatically enabled is set to true!");
-            this.pl.getTrailerManager().addTrailer(new Trailer(event.getPlayer()));
+            this.pl.getTrailerManager().addTrailer(new PlayerTrailer(event.getPlayer()));
         }
     }
 
@@ -109,7 +109,7 @@ public class TrailingPerspectivePlayerListener implements Listener {
 
     private void toggleTrailerTrailingPlayer(Player player) {
         if (this.pl.getTrailerManager().isBeingTrailed(player.getUniqueId())) {
-            this.pl.getTrailerManager().getTrailersTrailingPlayer(player.getUniqueId()).forEach(t -> t.setNoLongerTrailingAnyone());
+            this.pl.getTrailerManager().getTrailersTrailingEntityByUUID(player.getUniqueId()).forEach(t -> t.setNoLongerTrailingAnything());
         }
     }
 }

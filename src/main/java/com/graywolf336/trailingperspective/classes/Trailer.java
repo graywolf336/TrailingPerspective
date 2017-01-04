@@ -1,7 +1,5 @@
 package com.graywolf336.trailingperspective.classes;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -9,37 +7,31 @@ import org.bukkit.entity.Player;
 
 import com.graywolf336.trailingperspective.interfaces.ITrailer;
 
-public class Trailer implements ITrailer {
-    private List<String> previousTrailed;
-    private String cachedUsername;
-    private UUID uuid;
-    private UUID trailingPlayerUuid;
-    private long startTime;
-    private long currentTrailingStartTime;
+public abstract class Trailer implements ITrailer {
+    private UUID playerUuid;
+    private String playerUsername;
     private boolean wasSentHome;
     private boolean isForcedHome;
 
     public Trailer(Player player) {
-        this.previousTrailed = new ArrayList<String>();
-        this.uuid = player.getUniqueId();
-        this.cachedUsername = player.getName();
-        this.isForcedHome = false;
+        this.playerUuid = player.getUniqueId();
+        this.playerUsername = player.getName();
     }
 
     public Player getPlayer() {
-        return Bukkit.getPlayer(uuid);
+        return Bukkit.getPlayer(this.playerUuid);
     }
 
     public UUID getUUID() {
-        return this.uuid;
+        return this.playerUuid;
     }
 
     public String getUsername() {
-        return this.cachedUsername;
+        return this.playerUsername;
     }
 
     public boolean isOnline() {
-        return Bukkit.getPlayer(uuid) != null;
+        return Bukkit.getPlayer(this.playerUuid) != null;
     }
 
     public boolean wasSentHome() {
@@ -50,44 +42,8 @@ public class Trailer implements ITrailer {
         this.wasSentHome = sent;
     }
 
-    public Long getTotalTimeTrailing() {
-        return this.startTime == 0 ? this.startTime : System.currentTimeMillis() - this.startTime;
-    }
-
-    public boolean isCurrentlyTrailingSomeone() {
-        return this.trailingPlayerUuid != null;
-    }
-
-    public Long getCurrentPerspectiveTrailingTime() {
-        return this.currentTrailingStartTime == 0 ? this.currentTrailingStartTime : System.currentTimeMillis() - this.currentTrailingStartTime;
-    }
-
-    public void setPlayerCurrentlyTrailing(Player player) {
-        this.wasSentHome = false;
-        this.trailingPlayerUuid = player.getUniqueId();
-        this.currentTrailingStartTime = System.currentTimeMillis();
-        this.previousTrailed.add(player.getName());
-    }
-
-    public Player getPlayerCurrentlyTrailing() {
-        return this.trailingPlayerUuid == null ? null : Bukkit.getPlayer(this.trailingPlayerUuid);
-    }
-
-    public UUID getUUIDOfPlayerCurrentlyTrailing() {
-        return this.trailingPlayerUuid;
-    }
-
-    public void setNoLongerTrailingAnyone() {
-        this.trailingPlayerUuid = null;
-        this.currentTrailingStartTime = 0L;
-    }
-
-    public void flagReadyToGoNext() {
-        this.currentTrailingStartTime = 0L;
-    }
-
-    public List<String> getPlayersLastTrailed() {
-        return this.previousTrailed;
+    public boolean isForcedHome() {
+        return this.isForcedHome;
     }
 
     public void forcePlayerHome() {
@@ -96,9 +52,5 @@ public class Trailer implements ITrailer {
 
     public void unForcePlayerHome() {
         this.isForcedHome = false;
-    }
-
-    public boolean isForcedHome() {
-        return this.isForcedHome;
     }
 }

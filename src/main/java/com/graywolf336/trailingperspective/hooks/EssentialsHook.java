@@ -33,7 +33,7 @@ public class EssentialsHook extends Hook implements Listener {
         IUser user = event.getAffected();
 
         if (user.isAfk() && this.pl.getTrailerManager().isBeingTrailed(user.getBase().getUniqueId())) {
-            pl.getTrailerManager().getTrailersTrailingPlayer(user.getBase().getUniqueId()).forEach(t -> t.setNoLongerTrailingAnyone());
+            pl.getTrailerManager().getTrailersTrailingEntityByUUID(user.getBase().getUniqueId()).forEach(t -> t.setNoLongerTrailingAnything());
         }
     }
 }
