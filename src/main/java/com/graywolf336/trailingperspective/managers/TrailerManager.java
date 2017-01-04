@@ -86,7 +86,7 @@ public class TrailerManager implements ITrailerManager {
     }
 
     public List<PlayerTrailer> getPlayerTrailers() {
-        return this.trailers.stream().filter(t -> t instanceof PlayerTrailer).map(PlayerTrailer.class::cast).collect(Collectors.toList());
+        return this.getPlayerTrailersStream().collect(Collectors.toList());
     }
     
     public Stream<PlayerTrailer> getPlayerTrailersStream() {
@@ -94,7 +94,7 @@ public class TrailerManager implements ITrailerManager {
     }
 
     public List<MobTrailer> getMobTrailers() {
-        return this.trailers.stream().filter(t -> t instanceof MobTrailer).map(MobTrailer.class::cast).collect(Collectors.toList());
+        return this.getMobTrailersStream().collect(Collectors.toList());
     }
     
     public Stream<MobTrailer> getMobTrailersStream() {
