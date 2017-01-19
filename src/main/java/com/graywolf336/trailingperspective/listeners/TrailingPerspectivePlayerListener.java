@@ -1,6 +1,7 @@
 package com.graywolf336.trailingperspective.listeners;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.bukkit.GameMode;
@@ -60,12 +61,12 @@ public class TrailingPerspectivePlayerListener implements Listener {
 
     @EventHandler
     public void playerHoppedARide(VehicleEnterEvent event) {
-        Entity passenger = event.getEntered().getPassenger();
+        List<Entity> passenger = event.getEntered().getPassengers();
 
-        if (passenger instanceof Player) {
-            Player player = (Player) passenger;
-
-            this.toggleTrailerTrailingPlayer(player);
+        for(Entity e : passenger) {
+            if (e instanceof Player) {
+                this.toggleTrailerTrailingPlayer((Player) e);
+            }
         }
     }
 
