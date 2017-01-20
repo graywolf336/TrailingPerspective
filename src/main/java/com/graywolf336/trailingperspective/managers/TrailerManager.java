@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import com.graywolf336.trailingperspective.TrailingPerspectiveAPI;
 import com.graywolf336.trailingperspective.classes.MobTrailer;
 import com.graywolf336.trailingperspective.classes.PlayerTrailer;
+import com.graywolf336.trailingperspective.enums.Settings;
 import com.graywolf336.trailingperspective.events.NewMobTrailerEvent;
 import com.graywolf336.trailingperspective.events.NewPlayerTrailerEvent;
 import com.graywolf336.trailingperspective.interfaces.ITrailer;
@@ -22,9 +23,11 @@ import com.graywolf336.trailingperspective.interfaces.ITrailerManager;
 
 public class TrailerManager implements ITrailerManager {
     private List<ITrailer> trailers;
+    private List<String> blacklist;
 
-    public TrailerManager() {
+    public TrailerManager(List<String> blacklist) {
         this.trailers = new ArrayList<ITrailer>();
+        this.blacklist = blacklist;
     }
 
     public void addTrailer(ITrailer trailer) {
@@ -88,7 +91,7 @@ public class TrailerManager implements ITrailerManager {
     public List<PlayerTrailer> getPlayerTrailers() {
         return this.getPlayerTrailersStream().collect(Collectors.toList());
     }
-    
+
     public Stream<PlayerTrailer> getPlayerTrailersStream() {
         return this.trailers.stream().filter(t -> t instanceof PlayerTrailer).map(PlayerTrailer.class::cast);
     }
@@ -96,7 +99,7 @@ public class TrailerManager implements ITrailerManager {
     public List<MobTrailer> getMobTrailers() {
         return this.getMobTrailersStream().collect(Collectors.toList());
     }
-    
+
     public Stream<MobTrailer> getMobTrailersStream() {
         return this.trailers.stream().filter(t -> t instanceof MobTrailer).map(MobTrailer.class::cast);
     }
@@ -132,5 +135,27 @@ public class TrailerManager implements ITrailerManager {
         this.trailers.clear();
 
         return preTrailers;
+    }
+
+    public List<UUID> getBlacklist() {
+        return this.blacklist.stream().map(UUID::fromString).collect(Collectors.toList());
+    }
+
+    public Stream<String> getBlacklistStream() {
+        return this.blacklist.stream();
+    }
+
+    public void addToBlacklist(UUID id) {
+        this.blacklist.add(id.toString());
+        Settings.PERSPECTIVE_BLACKLIST.setAndSave(this.blacklist);
+    }
+
+    public boolean isBlacklisted(UUID id) {
+        return this.blacklist.contains(id.toString());
+    }
+
+    public void removeFromBlacklist(UUID id) {
+        this.blacklist.remove(id);
+        Settings.PERSPECTIVE_BLACKLIST.setAndSave(this.blacklist);
     }
 }

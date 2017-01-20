@@ -29,6 +29,8 @@ public enum Settings {
     LIGHT_LEVEL_FOR_NIGHT_VISION("perspective.night-vision.light-level"),
     /** The setting which controls how long the night vision potion lasts in seconds. */
     NIGHT_VISION_POTION_LENGTH_SECONDS("perspective.night-vision.length-in-seconds"),
+    /** The setting which contains a list of all the UUID's of players whom are blacklisted from being trailed. */
+    PERSPECTIVE_BLACKLIST("perspective.blacklist"),
     
     //Hooks for plugins
     /** Checks whether the configuration has essentials hook enabled. */
