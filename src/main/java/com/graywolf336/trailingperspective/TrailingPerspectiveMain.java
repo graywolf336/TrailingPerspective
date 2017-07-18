@@ -3,6 +3,7 @@ package com.graywolf336.trailingperspective;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.graywolf336.trailingperspective.commands.ForceTrailerHomeCommand;
+import com.graywolf336.trailingperspective.commands.PerspectiveBlacklistCommand;
 import com.graywolf336.trailingperspective.commands.SetTrailerHomeCommand;
 import com.graywolf336.trailingperspective.commands.SwitchPerspectiveCommand;
 import com.graywolf336.trailingperspective.commands.ToggleBeingMobTrailerCommand;
@@ -36,7 +37,7 @@ public class TrailingPerspectiveMain extends JavaPlugin {
         Settings.setPlugin(this);
         this.debug = Settings.DEBUG.asBoolean();
 
-        this.trailerManager = new TrailerManager();
+        this.trailerManager = new TrailerManager(Settings.PERSPECTIVE_BLACKLIST.asStringList());
         this.hookManager = new HookManager(this);
         this.getServer().getPluginManager().registerEvents(new TrailingPerspectivePlayerListener(this), this);
         this.getServer().getPluginManager().registerEvents(new TrailingPerspectiveMobListener(this), this);
@@ -110,6 +111,10 @@ public class TrailingPerspectiveMain extends JavaPlugin {
         ForceTrailerHomeCommand forceHomeCmd = new ForceTrailerHomeCommand(this);
         this.getCommand("forcetrailerhome").setExecutor(forceHomeCmd);
         this.getCommand("forcetrailerhome").setTabCompleter(forceHomeCmd);
+
+        PerspectiveBlacklistCommand blackListCmd = new PerspectiveBlacklistCommand(this);
+        this.getCommand("perspectiveblacklist").setExecutor(blackListCmd);
+        this.getCommand("perspectiveblacklist").setTabCompleter(blackListCmd);
     }
 
     private void setupWorkers() {

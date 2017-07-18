@@ -29,7 +29,9 @@ public enum Permissions {
     /**
      * The permission for being able to force the trailer home, defaults to op.
      */
-    SET_FORCE_HOME("trailingperspective.setforcehome");
+    SET_FORCE_HOME("trailingperspective.setforcehome"),
+    /** The permission for being able to manage the blacklist, defaults to op. */
+    BLACKLIST("trailingperspective.blacklist");
 
     private String node;
 

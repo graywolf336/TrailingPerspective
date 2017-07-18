@@ -15,6 +15,8 @@ commands:
     description: Flags the trailer to have their perspective switched.
   forcetrailerhome:
     description: Forces a trailer to go home and stay there.
+  perspectiveblacklist:
+    description: Manages the blacklist of perspectives
 permissions:
   trailingperspective.togglebeingtrailer:
     default: op
@@ -25,4 +27,6 @@ permissions:
   trailingperspective.switchperspective:
     default: op
   trailingperspective.switchperspective.others:
+    default: op
+  trailingperspective.blacklist:
     default: op

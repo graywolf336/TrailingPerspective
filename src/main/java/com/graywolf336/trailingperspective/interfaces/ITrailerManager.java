@@ -171,10 +171,10 @@ public interface ITrailerManager {
      * @return list of the current player trailers
      */
     public List<PlayerTrailer> getPlayerTrailers();
-    
+
     /**
      * Gets a {@link Stream} of the {@link PlayerTrailer}s
-     * 
+     *
      * @return stream of current player trailers
      */
     public Stream<PlayerTrailer> getPlayerTrailersStream();
@@ -185,10 +185,10 @@ public interface ITrailerManager {
      * @return list of the current mob trailers
      */
     public List<MobTrailer> getMobTrailers();
-    
+
     /**
      * Gets a {@link Stream} of the {@link MobTrailer}s
-     * 
+     *
      * @return stream of current mob trailers
      */
     public Stream<MobTrailer> getMobTrailersStream();
@@ -200,4 +200,40 @@ public interface ITrailerManager {
      * @return the list of removed trailers
      */
     public List<ITrailer> removeAllTrailers();
+
+    /**
+     * Gets the blacklist of perspectives to not trail.
+     *
+     * @return the list of blacklisted perspectives
+     */
+    public List<UUID> getBlacklist();
+
+    /**
+     * Gets the blacklist of perspectives to not trail in {@link Stream} format.
+     *
+     * @return the {@link Stream} of the blacklist
+     */
+    public Stream<String> getBlacklistStream();
+
+    /**
+     * Adds a perspective to the blacklist.
+     *
+     * @param id the {@link UUID} of the perspective to blacklist.
+     */
+    public void addToBlacklist(UUID id);
+
+    /**
+     * Checks if the perspective is blacklisted.
+     *
+     * @param id the {@link UUID} of the perspective.
+     * @return whether they are blacklisted or not
+     */
+    public boolean isBlacklisted(UUID id);
+
+    /**
+     * Removes a perspective from the blacklist.
+     *
+     * @param id the {@link UUID} of the perspective to remove
+     */
+    public void removeFromBlacklist(UUID id);
 }

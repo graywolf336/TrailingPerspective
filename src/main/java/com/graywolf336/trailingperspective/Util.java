@@ -20,7 +20,8 @@ public class Util {
     private final static Random random = new Random(System.currentTimeMillis());
 
     /**
-     * Converts a string like '20minutes' into the appropriate amount of milliseconds.
+     * Converts a string like '20minutes' into the appropriate amount of
+     * milliseconds.
      *
      * @param time in a string to convert.
      * @param fallback the time to fallback to if we failed to parse
@@ -158,5 +159,25 @@ public class Util {
             default:
                 return players.get(random.nextInt(players.size() - 1));
         }
+    }
+
+    /**
+     * Gets a single string from a list of strings, separated by the separator.
+     *
+     * @param separator The item to separate the items
+     * @param list The list of strings to combine
+     * @return the resulting combined string
+     */
+    public static String getStringFromList(String separator, List<String> list) {
+        StringBuilder result = new StringBuilder();
+
+        for (String s : list) {
+            if (result.length() != 0) {
+                result.append(separator);
+            }
+            result.append(s);
+        }
+
+        return result.toString();
     }
 }

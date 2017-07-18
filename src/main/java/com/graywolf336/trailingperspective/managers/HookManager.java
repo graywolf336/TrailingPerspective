@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import com.graywolf336.trailingperspective.TrailingPerspectiveMain;
 import com.graywolf336.trailingperspective.classes.Hook;
 import com.graywolf336.trailingperspective.enums.Settings;
+import com.graywolf336.trailingperspective.hooks.BlacklistHook;
 import com.graywolf336.trailingperspective.hooks.DefaultHook;
 import com.graywolf336.trailingperspective.hooks.EssentialsHook;
 import com.graywolf336.trailingperspective.interfaces.IHookManager;
@@ -43,6 +44,7 @@ public class HookManager implements IHookManager {
 
     private void loadHooks() {
         this.addHook(new DefaultHook());
+        this.addHook(new BlacklistHook(pl.getTrailerManager()));
 
         if (this.pl.getServer().getPluginManager().isPluginEnabled("Essentials") && Settings.HOOKS_ESSENTIALS_ENABLED.asBoolean()) {
             EssentialsHook esh = new EssentialsHook(this.pl);
